@@ -808,7 +808,7 @@ class GIFTParser extends Parser {
             this.MANY(() => {
                 this.OR([
                     {ALT: () => this.SUBRULE(this.Space)},
-                    {GATE: () => !this.BlankLine, ALT: () => this.SUBRULE(this.EndOfLine)}
+                    {GATE: () => !this.SUBRULE(this.BlankLine), ALT: () => this.SUBRULE(this.EndOfLine)}
                 ]);
             });
         });
@@ -838,7 +838,7 @@ class GIFTParser extends Parser {
             this.MANY(() => {
                 this.OR([
                     {
-                        GATE: () => !this.EndOfLine, ALT: () => this.CONSUME(Any)
+                        GATE: () => !this.SUBRULE(this.EndOfLine), ALT: () => this.CONSUME(Any)
                     }
                 ]);
                 
