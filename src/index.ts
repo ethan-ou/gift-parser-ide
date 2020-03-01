@@ -1,12 +1,17 @@
-import { GIFTLexer } from "./gift";
+import Parser from "./gift";
+import chevrotain from "chevrotain";
 
-let inputText = "Gift Language { =Hello ~Goodbye }";
-let lexingResult = GIFTLexer.tokenize(inputText);
+const result = Parser.parse("Hello");
 
-console.log(lexingResult);
+console.log(result);
+console.log(result.parseErrors);
 
+// const parserInstance = Parser.parserInstance;
+// const serializedGrammar = parserInstance.getSerializedGastProductions();
 
-
+// create the HTML Text
+// const htmlText = chevrotain.createSyntaxDiagramsCode(serializedGrammar);
+// console.log(htmlText);
 
 // export function parseGIFT(text: string) {
 //     const lexResult = Parser.tokenize(text);
