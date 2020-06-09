@@ -27,7 +27,6 @@ export default function (text: string, options?: any) {
   try {
     return { parse: parse(text), error: null };
   } catch (error) {
-    console.log(error, createError(error, text));
     return { parse: null, error: createError(error, text) };
   }
 }
