@@ -10,6 +10,8 @@ var grammar =
 var downloadLocation = path.join(__dirname, "/GIFT.pegjs");
 var parserLocation = path.join(__dirname, "../src/parser/parser.ts");
 
+var injectText = "// @ts-nocheck \n";
+
 var dirCheck = function (download, parser) {
   fs.ensureFileSync(download);
   fs.ensureFileSync(parser);
@@ -39,7 +41,7 @@ var createParser = function (file, dest) {
       plugins: [tspeg],
     });
 
-    fs.writeFileSync(dest, grammar);
+    fs.writeFileSync(dest, injectText + grammar);
     console.log("Grammar Created.");
   } catch (error) {
     console.log(error);
