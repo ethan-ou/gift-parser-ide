@@ -1077,4 +1077,9 @@ Text
   {
     text: `A single line scope {}`,
   },
+  {
+    text: `:A regular question:: {
+      =<img src=https://images.unsplash.com/photo-1591708318668-3ac92210fbb0>
+    }`,
+  },
 ];
