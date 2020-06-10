@@ -38,7 +38,7 @@ export default function (text: string): TextSplit[] {
 
     if (i === splitText.length - 1) {
       output.push({
-        start: i + 1 - splitArr.length,
+        start: i + 1 - (splitArr.length - 1),
         end: i + 1,
         text: splitArr.join("\n"),
       });
