@@ -2,10 +2,12 @@
  * Generate an array of important tokens in the text.
  * Each index of the array corresponds to a new line,
  * starting from 0. Index 0 is equal to line 1 etc.
- * @param text input text
+ * @param text Input text
+ * @returns An array of tokens where each array index
+ * corresponds to a line number, indexed from 0.
  */
-export function createTokens(text: string): string[] {
-  const textTokens: string[] = [];
+export function createTokens(text: string): TextToken[] {
+  const textTokens: TextToken[] = [];
 
   const emptyLines = findEmptyLines(text);
   const scopeList = findScopes(text);
@@ -49,8 +51,8 @@ export function createTokens(text: string): string[] {
   return textTokens;
 }
 
-export function createSingleLineScopeTokens(text: string): string[] {
-  const textTokens: string[] = [];
+export function createSingleLineScopeTokens(text: string): TextToken[] {
+  const textTokens: TextToken[] = [];
   const stack = [];
 
   const scopeList = findScopes(text);
@@ -87,6 +89,9 @@ export function createSingleLineScopeTokens(text: string): string[] {
  * Generates an array of all tokens that
  * open or close a GIFT question scope.
  * @param text Input text
+ * @returns An array of Parse objects showing
+ * where the scope tokens "{" "}" were found
+ * in the text.
  */
 export function findScopes(text: string): Parse[] {
   const tokens = { start: "{", end: "}" };
@@ -142,6 +147,8 @@ export function findScopes(text: string): Parse[] {
 /**
  * Find all empty lines in text.
  * @param text Input text
+ * @returns An array of empty line numbers
+ * indexed from 1.
  */
 export function findEmptyLines(text: string): number[] {
   const output = [];

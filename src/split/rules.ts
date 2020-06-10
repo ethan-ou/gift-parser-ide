@@ -1,15 +1,18 @@
 /**
  * Discards any empty lines inside a scope.
+ * If the function detects an "EMPTY_LINE"
+ * token between a "SCOPE_OPEN" or "SCOPE_CLOSED"
+ * token, it will remove the "EMPTY_LINE" token.
  * @param array Array of special tokens in text
  * @param singleScope Array of single-line scopes
  * @param length Number of lines in file.
  */
 export function noEmptyLinesInScope(
-  array: string[],
-  singleScope: string[],
+  array: TextToken[],
+  singleScope: TextToken[],
   length: number
-): string[] {
-  const output = [];
+): TextToken[] {
+  const output: TextToken[] = [];
   let scope = false;
   for (let i = 0; i < length; i++) {
     if (array[i] === "SCOPE_OPEN") {
