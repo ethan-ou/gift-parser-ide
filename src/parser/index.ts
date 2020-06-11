@@ -6,6 +6,9 @@ export default function (
   try {
     return { parse: parser(text), error: null };
   } catch (error) {
-    return { parse: null, error: error };
+    return {
+      parse: null,
+      error: error,
+    };
   }
 }

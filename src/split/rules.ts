@@ -1,8 +1,11 @@
+import { TextToken } from "../types";
+
 /**
  * Discards any empty lines inside a scope.
  * If the function detects an "EMPTY_LINE"
- * token between a "SCOPE_OPEN" or "SCOPE_CLOSED"
- * token, it will remove the "EMPTY_LINE" token.
+ * token between a "SCOPE_OPEN", "SCOPE_CLOSED"
+ * or after a "SCOPE" token, it will remove the
+ * "EMPTY_LINE" token.
  * @param array Array of special tokens in text
  * @param singleScope Array of single-line scopes
  * @param length Number of lines in file.

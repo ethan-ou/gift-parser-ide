@@ -1,3 +1,5 @@
+import { TextToken, Parse } from "../types";
+
 /**
  * Generate an array of important tokens in the text.
  * Each index of the array corresponds to a new line,

@@ -1,12 +1,17 @@
 import { IErrorArr } from "../types";
 import { SyntaxError } from "../parser/parser";
 
-export function fixErrorMessages(
+export default function message(
   originalText: string,
   message: IErrorArr
 ): IErrorArr {
+  const columnCorrected = correctTokenMessages(message);
+  return correctTextSplitMessages(originalText, columnCorrected);
+}
+
+function correctTextSplitMessages(text: string, message: IErrorArr) {
   const newLine = "\n";
-  const charNum = originalText.split(newLine).map((string) => string.length);
+  const charNum = text.split(newLine).map((string) => string.length);
   return {
     ...message,
     error: message.error.map((item) => {
@@ -22,13 +27,13 @@ export function fixErrorMessages(
   };
 }
 
-export function correctTokenMessages(errors: IErrorArr) {
+function correctTokenMessages(message: IErrorArr) {
   let iterators: { prevLine: undefined | number; count: number } = {
     prevLine: undefined,
     count: 0,
   };
 
-  const removeColumn = errors.error.map((item) => {
+  const corrected = message.error.map((item, index) => {
     const { start, end } = item.location;
 
     if (iterators.prevLine === start.line) {
@@ -38,20 +43,19 @@ export function correctTokenMessages(errors: IErrorArr) {
       iterators.prevLine = start.line;
     }
 
+    let output;
     if (end.line > start.line) {
-      return removeColumnStartError(iterators.count, item);
+      output = removeColumnStartError(iterators.count, item);
     } else {
-      return removeColumnError(iterators.count, item);
+      output = removeColumnError(iterators.count, item);
     }
+
+    return removeOffsetError(index, output);
   });
 
-  const output = removeColumn.map((item, index) =>
-    removeOffsetError(index, item)
-  );
-
   return {
-    ...errors,
-    error: output,
+    ...message,
+    error: corrected,
   };
 }
 

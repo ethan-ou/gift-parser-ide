@@ -1,5 +1,6 @@
 import { createTokens, createSingleLineScopeTokens } from "./tokens";
 import { noEmptyLinesInScope } from "./rules";
+import { TextSplit } from "../types";
 
 /**
  * Splits the text when an empty line is found.

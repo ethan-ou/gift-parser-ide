@@ -2,9 +2,8 @@ import parser from "../parser";
 import { IErrorArr, IError } from "../types";
 import token from "./token";
 import { SyntaxError } from "../parser/parser";
-import { correctTokenMessages, fixErrorMessages } from "./messages";
 
-export default function (text: string, message: IError): IErrorArr {
+export default function (message: IError): IErrorArr {
   const ITERATION_LIMIT = 50;
   const stack: string[] = [];
   const errors: SyntaxError[] = [];
@@ -36,11 +35,8 @@ export default function (text: string, message: IError): IErrorArr {
     i++;
   }
 
-  const finalError: IErrorArr = {
+  return {
     ...message,
     error: errors,
   };
-
-  const correctTokenError = correctTokenMessages(finalError);
-  return fixErrorMessages(text, correctTokenError);
 }
