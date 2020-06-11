@@ -13,9 +13,9 @@ import { noEmptyLinesInScope } from "./rules";
  */
 export default function (text: string): TextSplit[] {
   const output: TextSplit[] = [];
-
+  const newLine = "\n";
   const textTokens = createTokens(text);
-  const splitText = text.split("\n");
+  const splitText = text.split(newLine);
 
   const outputTokens = noEmptyLinesInScope(
     textTokens,
@@ -29,7 +29,7 @@ export default function (text: string): TextSplit[] {
       output.push({
         start: i + 1 - splitArr.length,
         end: i + 1,
-        text: splitArr.join("\n"),
+        text: splitArr.join(newLine),
       });
       splitArr = [];
     } else {
@@ -40,7 +40,7 @@ export default function (text: string): TextSplit[] {
       output.push({
         start: i + 1 - (splitArr.length - 1),
         end: i + 1,
-        text: splitArr.join("\n"),
+        text: splitArr.join(newLine),
       });
     }
   }
