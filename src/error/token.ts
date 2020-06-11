@@ -25,9 +25,6 @@ function findToken(
     throw new Error("Token is Null.");
   }
 
-  console.log(text[iteratorLower], text[iteratorUpper]);
-  console.log(iteratorUpper, UPPER_LIMIT, iteratorLower, LOWER_LIMIT);
-
   while (
     iteratorUpper < UPPER_LIMIT &&
     (iteratorLower > LOWER_LIMIT || iteratorLower === 0)
@@ -58,7 +55,7 @@ function escapeToken(text: string, location: number): string {
   const tokenNotEscaped = text[escapeLocation] !== escape;
 
   if (tokenIsAccepted && tokenNotEscaped) {
-    return `${text.slice(0, escapeLocation)}${escape}${text.slice(location)}`;
+    return `${text.slice(0, location)}${escape}${text.slice(location)}`;
   }
 
   throw new Error("No Token Found.");
