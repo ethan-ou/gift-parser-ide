@@ -1,9 +1,10 @@
 import { parse as parser, SyntaxError } from "./parser";
+import { IResult } from "../types";
 export default function (text: string, options?: any) {
   try {
     return { parse: parser(text), error: null };
   } catch (error) {
-    return { parse: null, error: [createError(error, text)] };
+    return { parse: null, error: createError(error, text) };
   }
 }
 
@@ -20,15 +21,10 @@ export function error(text: string, options?: any) {
     parser(text);
     return { error: null };
   } catch (error) {
-    return { error: [createError(error, text)] };
+    return { error: createError(error, text) };
   }
 }
 
-function createError(e: SyntaxError, text: string) {
-  return {
-    message: e.message,
-    found: e.found,
-    expected: e.expected,
-    location: e.location,
-  };
+function createError(e: SyntaxError, text: string): SyntaxError {
+  return e;
 }

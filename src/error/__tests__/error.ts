@@ -1,5 +1,4 @@
 import mocks from "../../__tests__/mocks";
-import { findToken } from "../index";
 import parse from "../../parser";
 import parser from "../../parser";
 
