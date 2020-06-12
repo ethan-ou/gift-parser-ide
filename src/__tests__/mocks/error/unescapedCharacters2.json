@@ -1,0 +1,22 @@
+[
+  {
+    "message": "Expected \"{\" but \"=\" found.",
+    "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+    "found": "=",
+    "location": {
+      "start": { "offset": 24, "line": 2, "column": 11 },
+      "end": { "offset": 25, "line": 2, "column": 12 }
+    },
+    "name": "SyntaxError"
+  },
+  {
+    "message": "Expected \"{\" but \"=\" found.",
+    "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+    "found": "=",
+    "location": {
+      "start": { "offset": 26, "line": 18, "column": 13 },
+      "end": { "offset": 27, "line": 18, "column": 14 }
+    },
+    "name": "SyntaxError"
+  }
+]

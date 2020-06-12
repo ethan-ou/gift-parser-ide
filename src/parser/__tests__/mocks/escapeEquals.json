@@ -1,0 +1,32 @@
+{
+  "parse": [
+    {
+      "type": "MC",
+      "title": null,
+      "stem": { "format": "moodle", "text": "Which answer equals 5?" },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "choices": [
+        {
+          "isCorrect": false,
+          "weight": null,
+          "text": { "format": "moodle", "text": "= 2 + 2" },
+          "feedback": null
+        },
+        {
+          "isCorrect": true,
+          "weight": null,
+          "text": { "format": "moodle", "text": "= 2 + 3" },
+          "feedback": null
+        },
+        {
+          "isCorrect": false,
+          "weight": null,
+          "text": { "format": "moodle", "text": "= 2 + 4" },
+          "feedback": null
+        }
+      ]
+    }
+  ],
+  "error": null
+}

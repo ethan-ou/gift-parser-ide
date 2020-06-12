@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import parser from "../index";
+import split from "../index";
 
-describe("PEG Parser Pass", () => {
-  const folderPath = path.join(__dirname, "../../__tests__/mocks/pass");
+describe("Clean Text", () => {
+  const folderPath = path.join(__dirname, "/mocks");
 
   const files = fs
     .readdirSync(folderPath, "utf-8")
@@ -12,19 +12,19 @@ describe("PEG Parser Pass", () => {
   files.forEach((file) => {
     const filePath = path.join(folderPath, file);
     const expectedPath = path.join(
-      path.join(__dirname, "/mocks"),
+      folderPath,
       `${path.basename(file, ".gift")}.json`
     );
 
     const text = fs.readFileSync(filePath, "utf-8");
 
     // Write new tests to directory.
-    // fs.writeFileSync(expectedPath, JSON.stringify(parser(text)));
+    // fs.writeFileSync(expectedPath, JSON.stringify(split(text)));
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
     it(`Parses ${file}`, () => {
-      expect(parser(text)).toEqual(expected);
+      expect(split(text)).toEqual(expected);
     });
   });
 });
