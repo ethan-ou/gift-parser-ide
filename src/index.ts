@@ -3,6 +3,7 @@ import { diff } from "deep-diff";
 import split from "./split";
 import parse from "./parser";
 import error from "./error";
+import clean from "./clean";
 import { IError, IParse, IErrorArr, TextSplit } from "./types";
 import { SyntaxError } from "./parser/parser";
 import message from "./message";
@@ -10,39 +11,54 @@ import message from "./message";
 export default class Parser {
   private output: SyntaxError[];
   private text: string;
-  private splitText: string[];
+  private split: TextSplit[];
   private incompleteParseOutput: (IParse | IErrorArr)[];
 
   constructor() {
     this.text = "";
-    this.splitText = [];
+    this.split = [];
     this.incompleteParseOutput = [];
     this.output = [];
   }
 
   public update(text: string): SyntaxError[] {
-    const CHARACTER_PERF_LIMIT = 30000;
     const cleanText = eol.lf(text);
 
-    if (cleanText.length < CHARACTER_PERF_LIMIT) {
-      return parser(cleanText);
-    }
+    const processText = clean(cleanText);
+    const newSplit = split(processText);
 
-    const newSplit = split(cleanText);
-    const newSplitText = newSplit.map((item) => item.text);
-    const diffArray = diff(this.splitText, newSplitText);
+    this.diff(newSplit);
+
+    this.text = cleanText;
+    this.split = newSplit;
+    this.output = this.correctMessages(this.incompleteParseOutput, this.text);
+    return this.output;
+  }
+
+  private diff(newSplit: TextSplit[]) {
+    const diffArray = diff(this.split, newSplit);
 
     if (!diffArray) {
-      return this.output;
+      return;
     }
 
     for (let diff of diffArray) {
       // If the change was an Edit
       if (diff.kind === "E") {
-        if (diff.path) {
+        if (diff?.path && diff.path[1] === "text") {
           this.incompleteParseOutput[diff.path[0]] = this.parse(
             newSplit[diff.path[0]]
           );
+        }
+
+        if (diff?.path && diff.path[1] === "start") {
+          this.incompleteParseOutput[diff.path[0]].start =
+            newSplit[diff.path[0]].start;
+        }
+
+        if (diff?.path && diff.path[1] === "end") {
+          this.incompleteParseOutput[diff.path[0]].end =
+            newSplit[diff.path[0]].end;
         }
       }
 
@@ -61,11 +77,6 @@ export default class Parser {
         }
       }
     }
-
-    this.text = cleanText;
-    this.splitText = newSplitText;
-    this.output = this.correctMessages(this.incompleteParseOutput, this.text);
-    return this.output;
   }
 
   private parse(item: TextSplit): IParse | IErrorArr {
@@ -90,7 +101,9 @@ export default class Parser {
 export function parser(text: string): SyntaxError[] {
   const cleanText = eol.lf(text);
 
-  const parsedText = split(cleanText).map((item) => {
+  const processText = clean(cleanText);
+
+  const parsedText = split(processText).map((item) => {
     return { ...parse(item.text), ...item };
   });
 
