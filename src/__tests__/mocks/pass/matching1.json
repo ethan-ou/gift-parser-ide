@@ -1,0 +1,45 @@
+[{
+        "type": "Matching",
+        "title": null,
+        "stem": {"format":"moodle", "text":"Matching Question."},
+        "hasEmbeddedAnswers": false,
+        "globalFeedback": null,
+        "matchPairs": [{
+                "subquestion": {"format":"moodle", "text":"subquestion1"},
+                "subanswer": "subanswer1"
+            },
+            {
+                "subquestion": {"format":"moodle", "text":"subquestion2"},
+                "subanswer": "subanswer2"
+            },
+            {
+                "subquestion": {"format":"moodle", "text":"subquestion3"},
+                "subanswer": "subanswer3"
+            }
+        ]
+    },
+    {
+        "type": "Matching",
+        "title": null,
+        "stem": {"format":"moodle", "text":"Match the following countries with their corresponding capitals."},
+        "hasEmbeddedAnswers": false,
+        "globalFeedback": null,
+        "matchPairs": [{
+                "subquestion": {"format":"moodle", "text":"Canada"},
+                "subanswer": "Ottawa"
+            },
+            {
+                "subquestion": {"format":"moodle", "text":"Italy"},
+                "subanswer": "Rome"
+            },
+            {
+                "subquestion": {"format":"moodle", "text":"Japan"},
+                "subanswer": "Tokyo"
+            },
+            {
+                "subquestion": {"format":"moodle", "text":"India"},
+                "subanswer": "New Delhi"
+            }
+        ]
+    }
+]
