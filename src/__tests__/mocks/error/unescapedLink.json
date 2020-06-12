@@ -1,1 +1,32 @@
-[{"message":"Expected \"}\" but \":\" found.","expected":[{"type":"literal","text":"}","ignoreCase":false}],"found":":","location":{"start":{"offset":46,"line":2,"column":21},"end":{"offset":47,"line":2,"column":22}},"name":"SyntaxError"},{"message":"Expected \"}\" but \":\" found.","expected":[{"type":"literal","text":"}","ignoreCase":false}],"found":":","location":{"start":{"offset":123,"line":3,"column":21},"end":{"offset":124,"line":3,"column":22}},"name":"SyntaxError"},{"message":"Expected \"}\" but \":\" found.","expected":[{"type":"literal","text":"}","ignoreCase":false}],"found":":","location":{"start":{"offset":200,"line":4,"column":21},"end":{"offset":201,"line":4,"column":22}},"name":"SyntaxError"}]
+[
+  {
+    "message": "Expected \"}\" but \":\" found.",
+    "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+    "found": ":",
+    "location": {
+      "start": { "offset": 46, "line": 2, "column": 21 },
+      "end": { "offset": 47, "line": 2, "column": 22 }
+    },
+    "name": "SyntaxError"
+  },
+  {
+    "message": "Expected \"}\" but \":\" found.",
+    "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+    "found": ":",
+    "location": {
+      "start": { "offset": 123, "line": 3, "column": 21 },
+      "end": { "offset": 124, "line": 3, "column": 22 }
+    },
+    "name": "SyntaxError"
+  },
+  {
+    "message": "Expected \"}\" but \":\" found.",
+    "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+    "found": ":",
+    "location": {
+      "start": { "offset": 200, "line": 4, "column": 21 },
+      "end": { "offset": 201, "line": 4, "column": 22 }
+    },
+    "name": "SyntaxError"
+  }
+]

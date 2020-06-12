@@ -1,33 +1,41 @@
-[{
+[
+  {
     "type": "MC",
     "title": null,
-    "stem": {"format":"moodle", "text":"Specify the seasons:"},
+    "stem": { "format": "moodle", "text": "Specify the seasons:" },
     "globalFeedback": null,
     "hasEmbeddedAnswers": false,
-    "choices": [{
+    "choices": [
+      {
         "isCorrect": true,
         "weight": null,
-        "text": {"format":"moodle", "text":"spring"},
+        "text": { "format": "moodle", "text": "spring" },
         "feedback": null
-    }, {
+      },
+      {
         "isCorrect": true,
         "weight": null,
-        "text": {"format":"moodle", "text":"summer"},
+        "text": { "format": "moodle", "text": "summer" },
         "feedback": null
-    }, {
+      },
+      {
         "isCorrect": true,
         "weight": null,
-        "text": {"format":"moodle", "text":"winter"},
+        "text": { "format": "moodle", "text": "winter" },
         "feedback": null
-    }, {
+      },
+      {
         "isCorrect": true,
         "weight": null,
-        "text": {"format":"moodle", "text":"autumn"},
+        "text": { "format": "moodle", "text": "autumn" },
         "feedback": null
-    }, {
+      },
+      {
         "isCorrect": false,
         "weight": null,
-        "text": {"format":"moodle", "text":"easter"},
+        "text": { "format": "moodle", "text": "easter" },
         "feedback": null
-    }]
-}]
+      }
+    ]
+  }
+]

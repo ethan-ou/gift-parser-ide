@@ -41,8 +41,8 @@ describe("Parser: GIFT Files with Errors", () => {
     const text = fs.readFileSync(filePath, "utf-8");
 
     // Write new tests to directory.
-    const GIFT = new Parser();
-    fs.writeFileSync(expectedPath, JSON.stringify(GIFT.update(text)));
+    // const GIFT = new Parser();
+    // fs.writeFileSync(expectedPath, JSON.stringify(GIFT.update(text)));
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
