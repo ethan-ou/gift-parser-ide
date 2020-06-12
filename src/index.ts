@@ -8,12 +8,20 @@ import { IError, IParse, IErrorArr, TextSplit } from "./types";
 import { SyntaxError } from "./parser/parser";
 import message from "./message";
 
+/**
+ * Incremental error parser for Moodle's GIFT format. Create a parser
+ * using var parser = new Parser(). Update the parser with parser.update(text);
+ * @class Parser
+ */
 export default class Parser {
   private output: SyntaxError[];
   private text: string;
   private split: TextSplit[];
   private incompleteParseOutput: (IParse | IErrorArr)[];
 
+  /**
+   * Create a new Parser object.
+   */
   constructor() {
     this.text = "";
     this.split = [];
@@ -21,6 +29,15 @@ export default class Parser {
     this.output = [];
   }
 
+  /**
+   * Update the parser with new text.
+   * The parser will parse the changes
+   * between the new text and the previous
+   * text.
+   * @param text Input text
+   * @returns {SyntaxError[]} An array of syntax
+   * errors.
+   */
   public update(text: string): SyntaxError[] {
     const cleanText = eol.lf(text);
 
@@ -35,6 +52,12 @@ export default class Parser {
     return this.output;
   }
 
+  /**
+   * Diffs the old TextSplit[] with a
+   * new TextSplit[] to look for changes
+   * within a text document.
+   * @param newSplit An array of TextSplit objects.
+   */
   private diff(newSplit: TextSplit[]) {
     const diffArray = diff(this.split, newSplit);
 
@@ -98,6 +121,14 @@ export default class Parser {
   }
 }
 
+/**
+ * Error parser for Moodle's GIFT format. The performance of this parser is faster
+ * for one-shot parsing but slower for continuous parsing. Use the Parser class for
+ * IDE usage.
+ * @param text Input text
+ * @returns An array of syntax errors.
+ */
+
 export function parser(text: string): SyntaxError[] {
   const cleanText = eol.lf(text);
 
@@ -118,6 +149,11 @@ export function parser(text: string): SyntaxError[] {
   return reduceToSyntaxErrors(correctMessages);
 }
 
+/**
+ * Reduces an array of internal Parse and ErrorArr objects to syntax errors.
+ * @param array Parsed input.
+ * @returns An array of syntax errors.
+ */
 function reduceToSyntaxErrors(array: (IParse | IErrorArr)[]): SyntaxError[] {
   const emptyorSpaces = /^\s*$/g;
   const output: SyntaxError[] = [];
