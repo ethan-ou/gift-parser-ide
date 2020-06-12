@@ -24,6 +24,8 @@ export default function (text: string): TextSplit[] {
     splitText.length
   );
 
+  /* Concatenates strings by pushing to an array,
+     then joining when an EMPTY_LINE token is found. */
   let splitArr: string[] = [];
   for (let i = 0; i < splitText.length; i++) {
     if (outputTokens[i] === "EMPTY_LINE") {
@@ -46,5 +48,7 @@ export default function (text: string): TextSplit[] {
     }
   }
 
-  return output;
+  const filteredOutput = output.filter((item) => item.text !== "");
+
+  return filteredOutput;
 }
