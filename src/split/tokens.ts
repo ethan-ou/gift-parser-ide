@@ -25,7 +25,7 @@ export function createTokens(text: string): TextToken[] {
     }
     if (
       scopeList[i].token === "}" &&
-      scopeList[i].line === multiLineScopes[lastPushedItem].line
+      scopeList[i].line === multiLineScopes[lastPushedItem]?.line
     ) {
       multiLineScopes.pop();
     } else if (scopeList[i].token === "}") {
