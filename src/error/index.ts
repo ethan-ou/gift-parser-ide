@@ -3,6 +3,14 @@ import { IErrorArr, IError } from "../types";
 import token from "./token";
 import { SyntaxError } from "../parser/parser";
 
+/**
+ * Recursively finds errors in a section of the input
+ * text. When an error is found, the token is escaped
+ * with a backslash "\\". This replicates the error
+ * recovery found on traditional LL(*) parsers.
+ * @param message
+ */
+
 export default function (message: IError): IErrorArr {
   const ITERATION_LIMIT = 50;
   const stack: string[] = [];
