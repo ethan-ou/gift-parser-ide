@@ -1,8 +1,6 @@
 import fs from "fs";
 import path from "path";
-
 import clean from "../index";
-import mocks from "../../__tests__/mocks";
 
 describe("Clean Text", () => {
   const folderPath = path.join(__dirname, "/mocks");
