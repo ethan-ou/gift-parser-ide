@@ -45,13 +45,25 @@ function findToken(
 
 function escapeToken(text: string, location: number): string {
   const escape = "\\";
-  const tokens = [":", "~", "=", "#"];
+  const newLine = "\n";
+  const tokens = [":", "~", "=", "#", "{", "}", "\n"];
 
-  // FUTURE: Test escaping these tokens.
-  const unsafeTokens = ["\n", "{", "}"];
+  const tokenIsAccepted = tokens.includes(text[location]);
+
+  if (tokenIsAccepted && text[location] === newLine) {
+    const escapeLocation = location + 1;
+    const tokenNotEscaped = text[escapeLocation] !== escape;
+
+    if (tokenNotEscaped) {
+      return `${text.slice(0, location + 1)}${escape}${text.slice(
+        location + 1
+      )}`;
+    } else {
+      throw new Error("No Token Found.");
+    }
+  }
 
   const escapeLocation = location - 1 > 0 ? location - 1 : 0;
-  const tokenIsAccepted = tokens.includes(text[location]);
   const tokenNotEscaped = text[escapeLocation] !== escape;
 
   if (tokenIsAccepted && tokenNotEscaped) {
