@@ -31,8 +31,9 @@ const text = `
 
 // essay
 ::Q8:: How are you? {}
+`;
 
-// true/false
+const text1 = `// true/false
 ::Q1:: 1+1=2 {T}
 
 // multiple choice with specified feedback for right and wrong answers
