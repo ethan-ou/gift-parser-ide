@@ -1082,4 +1082,10 @@ Text
       =<img src=https://images.unsplash.com/photo-1591708318668-3ac92210fbb0>
     }`,
   },
+  {
+    text: `//A comment
+    
+    
+    Question {}`,
+  },
 ];
