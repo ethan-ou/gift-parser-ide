@@ -1,23 +1,43 @@
 import { IErrorArr } from "../types";
 import { SyntaxError } from "../parser/parser";
 
+/**
+ * Process error messages to display the correct line, column and offset
+ * numbers for the text.
+ * @param originalText The text being parsed. Must have LF line endings.
+ * @param message The error message.
+ * @param lineEnding The type of line-ending used (e.g. \n, \r\n, \r).
+ * Used to correct offset property of syntax errors.
+ */
+
 export default function message(
   originalText: string,
-  message: IErrorArr
+  message: IErrorArr,
+  lineEnding: string
 ): IErrorArr {
   const columnCorrected = correctTokenMessages(message);
-  return correctTextSplitMessages(originalText, columnCorrected);
+  return correctTextSplitMessages(originalText, columnCorrected, lineEnding);
 }
 
-function correctTextSplitMessages(text: string, message: IErrorArr) {
+function correctTextSplitMessages(
+  text: string,
+  message: IErrorArr,
+  lineEnding: string
+) {
   const newLine = "\n";
-  const charNum = text.split(newLine).map((string) => string.length);
+  const charNum = text
+    .split(newLine)
+    .map((string) => string.length + lineEnding.length);
+  const offsetIndex = charNum[message.start - 2]
+    ? charNum[message.start - 2]
+    : 0;
+
   return {
     ...message,
     error: message.error.map((item) => {
       return incrementError(
         {
-          offset: charNum[message.start - 1],
+          offset: offsetIndex,
           line: message.start - 1,
           column: 0,
         },

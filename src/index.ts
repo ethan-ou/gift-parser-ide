@@ -1,5 +1,6 @@
 import eol from "eol";
 import { diff } from "deep-diff";
+import detectNewLine from "detect-newline";
 import split from "./split";
 import parse from "./parser";
 import error from "./error";
@@ -39,6 +40,7 @@ export default class Parser {
    * errors.
    */
   public update(text: string): SyntaxError[] {
+    const lineEnding = detectNewLine.graceful(text);
     const cleanText = eol.lf(text);
 
     const processText = clean(cleanText);
@@ -48,7 +50,11 @@ export default class Parser {
 
     this.text = cleanText;
     this.split = newSplit;
-    this.output = this.correctMessages(this.incompleteParseOutput, this.text);
+    this.output = this.correctMessages(
+      this.incompleteParseOutput,
+      this.text,
+      lineEnding
+    );
     return this.output;
   }
 
@@ -112,9 +118,13 @@ export default class Parser {
     }
   }
 
-  private correctMessages(parseArray: (IParse | IErrorArr)[], text: string) {
+  private correctMessages(
+    parseArray: (IParse | IErrorArr)[],
+    text: string,
+    lineEnding: string
+  ) {
     const correctMessages: (IParse | IErrorArr)[] = parseArray.map((item) =>
-      item.error !== null ? message(text, item) : item
+      item.error !== null ? message(text, item, lineEnding) : item
     );
 
     return reduceToSyntaxErrors(correctMessages);
@@ -130,6 +140,7 @@ export default class Parser {
  */
 
 export function parser(text: string): SyntaxError[] {
+  const lineEnding = detectNewLine.graceful(text);
   const cleanText = eol.lf(text);
 
   const processText = clean(cleanText);
@@ -143,7 +154,7 @@ export function parser(text: string): SyntaxError[] {
   );
 
   const correctMessages = checkErrors.map((item) =>
-    item.error !== null ? message(cleanText, item) : item
+    item.error !== null ? message(cleanText, item, lineEnding) : item
   );
 
   return reduceToSyntaxErrors(correctMessages);
