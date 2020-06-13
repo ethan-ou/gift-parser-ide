@@ -4,7 +4,7 @@
   "description": "A parser for Moodle's GIFT format designed for error checking in IDE's.",
   "main": "./out/index.js",
   "scripts": {
-    "start": "tsc -p ./tsconfig.json && node out/index.js",
+    "start": "npm run build && node out/index.js",
     "build": "tsc -p ./tsconfig.json",
     "test": "jest",
     "lint": "eslint . --fix",
@@ -12,7 +12,7 @@
     "prepublishOnly": "npm test && npm run lint",
     "prettier": "prettier --write .",
     "update:parser": "node ./scripts/updateParser.js",
-    "test:perf": "tsc -p ./tsconfig.json && node ./scripts/performance.js"
+    "test:perf": "npm run build && node ./scripts/performance.js"
   },
   "repository": {
     "type": "git",
