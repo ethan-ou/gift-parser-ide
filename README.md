@@ -7,7 +7,7 @@ This project builds on [fuhrmanator's GIFT grammar](https://github.com/fuhrmanat
 ## Install
 
 ```
-npm install gift-parser
+npm install gift-parser-ide
 ```
 
 ## Usage
