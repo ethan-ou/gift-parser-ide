@@ -1,1 +1,13 @@
-{"parse":null,"error":{"message":"Expected \"}\" but \":\" found.","expected":[{"type":"literal","text":"}","ignoreCase":false}],"found":":","location":{"start":{"offset":46,"line":2,"column":21},"end":{"offset":47,"line":2,"column":22}},"name":"SyntaxError"}}
+{
+  "parse": null,
+  "error": {
+    "message": "Expected \"}\" but \":\" found.",
+    "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+    "found": ":",
+    "location": {
+      "start": { "offset": 46, "line": 2, "column": 21 },
+      "end": { "offset": 47, "line": 2, "column": 22 }
+    },
+    "name": "SyntaxError"
+  }
+}

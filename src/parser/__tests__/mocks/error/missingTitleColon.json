@@ -1,1 +1,19 @@
-{"parse":null,"error":{"message":"Expected \"{\", :: Title ::, Category, Description, or Question stem but \":\" found.","expected":[{"type":"other","description":"Category"},{"type":"other","description":"Description"},{"type":"other","description":":: Title ::"},{"type":"other","description":"Question stem"},{"type":"literal","text":"{","ignoreCase":false}],"found":":","location":{"start":{"offset":0,"line":1,"column":1},"end":{"offset":1,"line":1,"column":2}},"name":"SyntaxError"}}
+{
+  "parse": null,
+  "error": {
+    "message": "Expected \"{\", :: Title ::, Category, Description, or Question stem but \":\" found.",
+    "expected": [
+      { "type": "other", "description": "Category" },
+      { "type": "other", "description": "Description" },
+      { "type": "other", "description": ":: Title ::" },
+      { "type": "other", "description": "Question stem" },
+      { "type": "literal", "text": "{", "ignoreCase": false }
+    ],
+    "found": ":",
+    "location": {
+      "start": { "offset": 0, "line": 1, "column": 1 },
+      "end": { "offset": 1, "line": 1, "column": 2 }
+    },
+    "name": "SyntaxError"
+  }
+}
