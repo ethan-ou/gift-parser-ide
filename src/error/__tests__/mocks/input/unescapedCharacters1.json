@@ -1,0 +1,16 @@
+{
+  "parse": null,
+  "error": {
+    "message": "Expected \"{\" but \"=\" found.",
+    "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+    "found": "=",
+    "location": {
+      "start": { "offset": 92, "line": 3, "column": 11 },
+      "end": { "offset": 93, "line": 3, "column": 12 }
+    },
+    "name": "SyntaxError"
+  },
+  "start": 1,
+  "end": 4,
+  "text": "::GIFT range of non-escaped symbols::\nHere's a question that has symbols inside, \nsuch as `-=\\[\\];',./~!@#$%^&*()_+{}|\\:\"<>? {True}"
+}

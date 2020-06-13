@@ -1,0 +1,22 @@
+// matching
+::Q4:: Which animal eats which food? { =cat -> cat food =dog -> dog food }
+
+// math range question
+::Q5:: What is a number from 1 to 5? {#3:2}
+
+// math range specified with interval end points
+::Q6:: What is a number from 1 to 5? {#1..5}
+// translated on import to the same as Q5, but unavailable from Moodle question interface
+
+:Incomplete:: {
+    =Answer
+}
+
+// multiple numeric answers with partial credit and feedback
+::Q7:: When was Ulysses S. Grant born? {#
+         =1822:0      # Correct! Full credit.
+         =%50%1822:2  # He was born in 1822. Half credit for being close.
+}
+
+// essay
+::Q8:: How are you? {}

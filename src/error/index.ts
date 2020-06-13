@@ -19,8 +19,10 @@ export default function (message: IError): IErrorArr {
   stack.push(message.text);
   errors.push(message.error);
 
-  const findErrors = (): void | Error => {
-    try {
+  try {
+    let i = 0;
+
+    while (i < ITERATION_LIMIT) {
       let findToken = token(stack[stack.length - 1], errors[errors.length - 1]);
       stack.push(findToken);
 
@@ -28,20 +30,12 @@ export default function (message: IError): IErrorArr {
 
       if (newError.error !== null) {
         errors.push(newError.error);
+        i++;
       } else {
-        throw new Error("No Parse Found");
+        throw new Error("Finished");
       }
-    } catch (err) {
-      return err;
     }
-  };
-
-  let result;
-  let i = 0;
-  while (!(result instanceof Error) && i < ITERATION_LIMIT) {
-    result = findErrors();
-    i++;
-  }
+  } catch (err) {}
 
   return {
     ...message,

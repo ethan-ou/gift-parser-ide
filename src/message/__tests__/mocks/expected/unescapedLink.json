@@ -1,0 +1,38 @@
+{
+  "parse": null,
+  "error": [
+    {
+      "message": "Expected \"}\" but \":\" found.",
+      "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+      "found": ":",
+      "location": {
+        "start": { "offset": 46, "line": 2, "column": 21 },
+        "end": { "offset": 47, "line": 2, "column": 22 }
+      },
+      "name": "SyntaxError"
+    },
+    {
+      "message": "Expected \"}\" but \":\" found.",
+      "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+      "found": ":",
+      "location": {
+        "start": { "offset": 123, "line": 3, "column": 21 },
+        "end": { "offset": 124, "line": 3, "column": 22 }
+      },
+      "name": "SyntaxError"
+    },
+    {
+      "message": "Expected \"}\" but \":\" found.",
+      "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+      "found": ":",
+      "location": {
+        "start": { "offset": 200, "line": 4, "column": 21 },
+        "end": { "offset": 201, "line": 4, "column": 22 }
+      },
+      "name": "SyntaxError"
+    }
+  ],
+  "start": 1,
+  "end": 5,
+  "text": "::Question with Links:: {\n    =<img src\\=https://images.unsplash.com/photo-1591708318668-3ac92210fbb0>\n    ~<img src\\=https://images.unsplash.com/photo-1587613990051-1b291c1a7080>\n    ~<img src\\=https://images.unsplash.com/photo-1591880907925-e8a75dc8cc1d>\n}"
+}

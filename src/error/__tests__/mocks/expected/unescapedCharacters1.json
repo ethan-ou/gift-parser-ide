@@ -1,0 +1,62 @@
+{
+  "parse": null,
+  "error": [
+    {
+      "message": "Expected \"{\" but \"=\" found.",
+      "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+      "found": "=",
+      "location": {
+        "start": { "offset": 92, "line": 3, "column": 11 },
+        "end": { "offset": 93, "line": 3, "column": 12 }
+      },
+      "name": "SyntaxError"
+    },
+    {
+      "message": "Expected \"{\" but \"~\" found.",
+      "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+      "found": "~",
+      "location": {
+        "start": { "offset": 103, "line": 3, "column": 22 },
+        "end": { "offset": 104, "line": 3, "column": 23 }
+      },
+      "name": "SyntaxError"
+    },
+    {
+      "message": "Expected \"{\" but \"#\" found.",
+      "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+      "found": "#",
+      "location": {
+        "start": { "offset": 107, "line": 3, "column": 26 },
+        "end": { "offset": 108, "line": 3, "column": 27 }
+      },
+      "name": "SyntaxError"
+    },
+    {
+      "message": "Expected (blank line separator) but \"{\" found.",
+      "expected": [
+        { "type": "other", "description": "(blank line separator)" }
+      ],
+      "found": "{",
+      "location": {
+        "start": { "offset": 128, "line": 3, "column": 47 },
+        "end": { "offset": 129, "line": 3, "column": 48 }
+      },
+      "name": "SyntaxError"
+    },
+    {
+      "message": "Expected (blank line separator) but \"}\" found.",
+      "expected": [
+        { "type": "other", "description": "(blank line separator)" }
+      ],
+      "found": "}",
+      "location": {
+        "start": { "offset": 134, "line": 3, "column": 53 },
+        "end": { "offset": 135, "line": 3, "column": 54 }
+      },
+      "name": "SyntaxError"
+    }
+  ],
+  "start": 1,
+  "end": 4,
+  "text": "::GIFT range of non-escaped symbols::\nHere's a question that has symbols inside, \nsuch as `-=\\[\\];',./~!@#$%^&*()_+{}|\\:\"<>? {True}"
+}

@@ -1,0 +1,16 @@
+{
+  "parse": null,
+  "error": {
+    "message": "Expected \"}\" but \"#\" found.",
+    "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+    "found": "#",
+    "location": {
+      "start": { "offset": 201, "line": 5, "column": 14 },
+      "end": { "offset": 202, "line": 5, "column": 15 }
+    },
+    "name": "SyntaxError"
+  },
+  "start": 1,
+  "end": 12,
+  "text": "::GIFT Control Characters::\nWhich of the following is NOT a control character for the GIFT import format? {\n  ~ \\~     # \\~ is a control character.\n  ~ \\=     # \\= is a control character.\n  ~ \\#     # # is a control character.\n  ~ {     # \\{ is a control character.\n  ~ \\}     # \\} is a control character.\n  ~ \\:     # \\: is a control character.\n  = \\      # Correct! \\ (backslash) is not a control character. BUT,\n             it is used to escape the control characters.\n}"
+}

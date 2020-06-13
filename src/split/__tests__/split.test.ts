@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import split from "../index";
 
-describe("Clean Text", () => {
+describe("Split Module", () => {
   const folderPath = path.join(__dirname, "/mocks");
 
   const files = fs

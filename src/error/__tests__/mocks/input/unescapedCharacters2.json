@@ -1,0 +1,16 @@
+{
+  "parse": null,
+  "error": {
+    "message": "Expected \"{\" but \"=\" found.",
+    "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+    "found": "=",
+    "location": {
+      "start": { "offset": 10, "line": 1, "column": 11 },
+      "end": { "offset": 11, "line": 1, "column": 12 }
+    },
+    "name": "SyntaxError"
+  },
+  "start": 2,
+  "end": 3,
+  "text": "::Q1:: 1+1=2 {T}"
+}
