@@ -1,7 +1,7 @@
 {
   "name": "gift-parser",
   "version": "0.0.1",
-  "description": "A parser for Moodle's GIFT format for IDE's and platforms that require flexible error handling.",
+  "description": "A parser for Moodle's GIFT format designed for error checking in IDE's.",
   "main": "./out/index.js",
   "scripts": {
     "start": "tsc -p ./tsconfig.json && node out/index.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ethan-ou/GIFT-Parser.git"
+    "url": "git+https://github.com/ethan-ou/gift-parser.git"
   },
   "author": "ethan-ou",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ethan-ou/GIFT-Parser/issues"
+    "url": "https://github.com/ethan-ou/gift-parser/issues"
   },
-  "homepage": "https://github.com/ethan-ou/GIFT-Parser#readme",
+  "homepage": "https://github.com/ethan-ou/gift-parser#readme",
   "dependencies": {
     "deep-diff": "^1.0.2",
     "detect-newline": "^3.1.0",
