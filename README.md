@@ -22,17 +22,17 @@ There are two parsers available:
 **ES6+**
 
 ```javascript
-import Parser from "gift-parser"; // Default: Class-based Incremental Parser
+import Parser from "gift-parser-ide"; // Default: Class-based Incremental Parser
 
-import { parser } from "gift-parser"; // Function-based One-Shot Parser
+import { parser } from "gift-parser-ide"; // Function-based One-Shot Parser
 ```
 
 **Node/CommonJS**
 
 ```javascript
-var Parser = require("gift-parser").default; // Default:  Class-based Incremental Parser
+var Parser = require("gift-parser-ide").default; // Default:  Class-based Incremental Parser
 
-var parser = require("gift-parser").parser; // Function-based One-Shot Parser
+var parser = require("gift-parser-ide").parser; // Function-based One-Shot Parser
 ```
 
 ### Example
