@@ -1,10 +1,10 @@
 {
   "name": "gift-parser-ide",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A parser for Moodle's GIFT format designed for error checking in IDE's.",
-  "main": "./out/index.js",
+  "main": "out/index.js",
   "scripts": {
-    "start": "npm run build && node out/index.js",
+    "start": "npm run build && node ./out/index.js",
     "build": "tsc -p ./tsconfig.json",
     "test": "jest",
     "lint": "eslint . --fix",
@@ -51,5 +51,8 @@
     "hooks": {
       "pre-commit": "npm run prettier"
     }
-  }
+  },
+  "files": [
+    "out/**/*"
+  ]
 }
