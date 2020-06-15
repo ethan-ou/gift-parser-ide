@@ -1,4 +1,4 @@
-import { TextToken, Parse } from "../types";
+import { CharToken, LineToken } from "../types";
 
 /**
  * Generate an array of important tokens in the text.
@@ -8,12 +8,12 @@ import { TextToken, Parse } from "../types";
  * @returns An array of tokens where each array index
  * corresponds to a line number, indexed from 0.
  */
-export function createTokens(text: string): TextToken[] {
-  const textTokens: TextToken[] = [];
+export function createTokens(text: string): LineToken[] {
+  const lineTokens: LineToken[] = [];
 
   const emptyLines = findEmptyLines(text);
   const scopeList = findScopes(text);
-  const multiLineScopes: Parse[] = [];
+  const multiLineScopes: CharToken[] = [];
 
   //  Remove all scopes that start and end on the same line.
   //  The remaining scopes are multiline scopes.
@@ -33,32 +33,32 @@ export function createTokens(text: string): TextToken[] {
     }
   }
 
-  //  Add empty lines to the textTokens array.
+  //  Add empty lines to the lineTokens array.
   for (let i = 0; i < emptyLines.length; i++) {
-    textTokens[emptyLines[i] - 1] = "EMPTY_LINE";
+    lineTokens[emptyLines[i] - 1] = "EMPTY_LINE";
   }
 
   // If a scope starts and ends on different lines, add to the
-  // textTokens array.
+  // lineTokens array.
   for (let i = 0; i < multiLineScopes.length; i++) {
     if (multiLineScopes[i].token === "{") {
-      textTokens[multiLineScopes[i].line - 1] = "SCOPE_OPEN";
+      lineTokens[multiLineScopes[i].line - 1] = "SCOPE_OPEN";
     }
 
     if (scopeList[i].token === "}") {
-      textTokens[multiLineScopes[i].line - 1] = "SCOPE_CLOSED";
+      lineTokens[multiLineScopes[i].line - 1] = "SCOPE_CLOSED";
     }
   }
 
-  return textTokens;
+  return lineTokens;
 }
 
-export function createSingleLineScopeTokens(text: string): TextToken[] {
-  const textTokens: TextToken[] = [];
+export function createSingleLineScopeTokens(text: string): LineToken[] {
+  const lineTokens: LineToken[] = [];
   const stack = [];
 
   const scopeList = findScopes(text);
-  const singleLineScopes: Parse[] = [];
+  const singleLineScopes: CharToken[] = [];
 
   for (let i = 0; i < scopeList.length; i++) {
     if (scopeList[i].token === "{") {
@@ -77,14 +77,14 @@ export function createSingleLineScopeTokens(text: string): TextToken[] {
   // Output tokens
   for (let i = 0; i < singleLineScopes.length; i++) {
     if (singleLineScopes[i].token === "{") {
-      textTokens[singleLineScopes[i].line - 1] = "SCOPE";
+      lineTokens[singleLineScopes[i].line - 1] = "SCOPE";
     }
 
     if (singleLineScopes[i].token === "}") {
-      textTokens[singleLineScopes[i].line - 1] = "SCOPE";
+      lineTokens[singleLineScopes[i].line - 1] = "SCOPE";
     }
   }
-  return textTokens;
+  return lineTokens;
 }
 
 /**
@@ -95,9 +95,9 @@ export function createSingleLineScopeTokens(text: string): TextToken[] {
  * where the scope tokens "{" "}" were found
  * in the text.
  */
-export function findScopes(text: string): Parse[] {
+export function findScopes(text: string): CharToken[] {
   const tokens = { start: "{", end: "}" };
-  const output: Parse[] = [];
+  const output: CharToken[] = [];
   const lineBreak = "\n";
   const iterators = {
     i: 0,

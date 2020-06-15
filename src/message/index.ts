@@ -1,5 +1,4 @@
-import { IErrorArr } from "../types";
-import { SyntaxError } from "../parser/parser";
+import { ErrorResultArr, GIFTSyntaxError } from "../types";
 
 /**
  * Process error messages to display the correct line, column and offset
@@ -12,16 +11,16 @@ import { SyntaxError } from "../parser/parser";
 
 export default function message(
   originalText: string,
-  message: IErrorArr,
+  message: ErrorResultArr,
   lineEnding: string
-): IErrorArr {
+): ErrorResultArr {
   const columnCorrected = correctTokenMessages(message);
   return correctTextSplitMessages(originalText, columnCorrected, lineEnding);
 }
 
 function correctTextSplitMessages(
   text: string,
-  message: IErrorArr,
+  message: ErrorResultArr,
   lineEnding: string
 ) {
   const newLine = "\n";
@@ -47,7 +46,7 @@ function correctTextSplitMessages(
   };
 }
 
-function correctTokenMessages(message: IErrorArr) {
+function correctTokenMessages(message: ErrorResultArr) {
   let iterators: { prevLine: undefined | number; count: number } = {
     prevLine: undefined,
     count: 0,
@@ -85,8 +84,8 @@ export function incrementError(
     offset: number;
     column: number;
   },
-  message: SyntaxError
-): SyntaxError {
+  message: GIFTSyntaxError
+): GIFTSyntaxError {
   return {
     ...message,
     location: {
@@ -109,8 +108,8 @@ export function incrementError(
 
 export function incrementColumnError(
   number: number,
-  message: SyntaxError
-): SyntaxError {
+  message: GIFTSyntaxError
+): GIFTSyntaxError {
   return {
     ...message,
     location: {
@@ -129,8 +128,8 @@ export function incrementColumnError(
 
 export function incrementOffsetError(
   number: number,
-  message: SyntaxError
-): SyntaxError {
+  message: GIFTSyntaxError
+): GIFTSyntaxError {
   return {
     ...message,
     location: {
@@ -149,8 +148,8 @@ export function incrementOffsetError(
 
 export function incrementLineError(
   number: number,
-  message: SyntaxError
-): SyntaxError {
+  message: GIFTSyntaxError
+): GIFTSyntaxError {
   return {
     ...message,
     location: {
@@ -169,8 +168,8 @@ export function incrementLineError(
 
 export function removeOffsetError(
   number: number,
-  message: SyntaxError
-): SyntaxError {
+  message: GIFTSyntaxError
+): GIFTSyntaxError {
   return {
     ...message,
     location: {
@@ -189,8 +188,8 @@ export function removeOffsetError(
 
 export function removeLineError(
   number: number,
-  message: SyntaxError
-): SyntaxError {
+  message: GIFTSyntaxError
+): GIFTSyntaxError {
   return {
     ...message,
     location: {
@@ -209,8 +208,8 @@ export function removeLineError(
 
 export function removeColumnError(
   number: number,
-  message: SyntaxError
-): SyntaxError {
+  message: GIFTSyntaxError
+): GIFTSyntaxError {
   return {
     ...message,
     location: {
@@ -229,8 +228,8 @@ export function removeColumnError(
 
 export function removeColumnStartError(
   number: number,
-  message: SyntaxError
-): SyntaxError {
+  message: GIFTSyntaxError
+): GIFTSyntaxError {
   return {
     ...message,
     location: {

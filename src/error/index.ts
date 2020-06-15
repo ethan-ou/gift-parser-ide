@@ -1,7 +1,6 @@
 import parser from "../parser";
-import { IErrorArr, IError } from "../types";
+import { ErrorResultArr, ErrorResult, GIFTSyntaxError } from "../types";
 import token from "./token";
-import { SyntaxError } from "../parser/parser";
 
 /**
  * Recursively finds errors in a section of the input
@@ -11,10 +10,10 @@ import { SyntaxError } from "../parser/parser";
  * @param message
  */
 
-export default function (message: IError): IErrorArr {
+export default function (message: ErrorResult): ErrorResultArr {
   const ITERATION_LIMIT = 50;
   const stack: string[] = [];
-  const errors: SyntaxError[] = [];
+  const errors: GIFTSyntaxError[] = [];
 
   stack.push(message.text);
   errors.push(message.error);

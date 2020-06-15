@@ -5,8 +5,14 @@ import split from "./split";
 import parse from "./parser";
 import error from "./error";
 import clean from "./clean";
-import { IError, IParse, IErrorArr, TextSplit } from "./types";
-import { SyntaxError } from "./parser/parser";
+import {
+  ErrorResult,
+  ParseResult,
+  ErrorResultArr,
+  TextSplit,
+  GIFTSyntaxError,
+  GIFTResult,
+} from "./types";
 import message from "./message";
 
 /**
@@ -15,10 +21,10 @@ import message from "./message";
  * @class Parser
  */
 export default class Parser {
-  private output: SyntaxError[];
+  private output: GIFTSyntaxError[];
   private text: string;
   private split: TextSplit[];
-  private incompleteParseOutput: (IParse | IErrorArr)[];
+  private incompleteParseOutput: (ParseResult | ErrorResultArr)[];
 
   /**
    * Create a new Parser object.
@@ -36,11 +42,10 @@ export default class Parser {
    * between the new text and the previous
    * text.
    * @param text Input text
-   * @returns {SyntaxError[]} An array of syntax
+   * @returns {GIFTSyntaxError[]} An array of syntax
    * errors.
    */
-  public update(text: string): SyntaxError[] {
-    const lineEnding = detectNewLine.graceful(text);
+  public update(text: string): GIFTSyntaxError[] {
     const cleanText = eol.lf(text);
 
     const processText = clean(cleanText);
@@ -53,7 +58,7 @@ export default class Parser {
     this.output = this.correctMessages(
       this.incompleteParseOutput,
       this.text,
-      lineEnding
+      detectNewLine.graceful(text)
     );
     return this.output;
   }
@@ -74,20 +79,22 @@ export default class Parser {
     for (let diff of diffArray) {
       // If the change was an Edit
       if (diff.kind === "E") {
-        if (diff?.path && diff.path[1] === "text") {
-          this.incompleteParseOutput[diff.path[0]] = this.parse(
-            newSplit[diff.path[0]]
+        let diffIndex = diff?.path && diff.path[0];
+        let diffKey = diff?.path && diff.path[1];
+
+        if (diffKey === "text") {
+          this.incompleteParseOutput[diffIndex] = this.parse(
+            newSplit[diffIndex]
           );
         }
 
-        if (diff?.path && diff.path[1] === "start") {
-          this.incompleteParseOutput[diff.path[0]].start =
-            newSplit[diff.path[0]].start;
+        if (diffKey === "start") {
+          this.incompleteParseOutput[diffIndex].start =
+            newSplit[diffIndex].start;
         }
 
-        if (diff?.path && diff.path[1] === "end") {
-          this.incompleteParseOutput[diff.path[0]].end =
-            newSplit[diff.path[0]].end;
+        if (diffKey === "end") {
+          this.incompleteParseOutput[diffIndex].end = newSplit[diffIndex].end;
         }
       }
 
@@ -108,8 +115,11 @@ export default class Parser {
     }
   }
 
-  private parse(item: TextSplit): IParse | IErrorArr {
-    const parsedText: IError | IParse = { ...parse(item.text), ...item };
+  private parse(item: TextSplit): GIFTResult {
+    const parsedText: ErrorResult | ParseResult = {
+      ...parse(item.text),
+      ...item,
+    };
 
     if (parsedText.error !== null) {
       return error(parsedText);
@@ -119,15 +129,15 @@ export default class Parser {
   }
 
   private correctMessages(
-    parseArray: (IParse | IErrorArr)[],
+    parseArray: GIFTResult[],
     text: string,
     lineEnding: string
   ) {
-    const correctMessages: (IParse | IErrorArr)[] = parseArray.map((item) =>
+    const correctMessages: GIFTResult[] = parseArray.map((item) =>
       item.error !== null ? message(text, item, lineEnding) : item
     );
 
-    return reduceToSyntaxErrors(correctMessages);
+    return reduceToGIFTSyntaxErrors(correctMessages);
   }
 }
 
@@ -139,8 +149,7 @@ export default class Parser {
  * @returns An array of syntax errors.
  */
 
-export function parser(text: string): SyntaxError[] {
-  const lineEnding = detectNewLine.graceful(text);
+export function parser(text: string): GIFTSyntaxError[] {
   const cleanText = eol.lf(text);
 
   const processText = clean(cleanText);
@@ -149,15 +158,17 @@ export function parser(text: string): SyntaxError[] {
     return { ...parse(item.text), ...item };
   });
 
-  const checkErrors: (IParse | IErrorArr)[] = parsedText.map((item) =>
-    item.error !== null ? error(item as IError) : (item as IParse)
+  const checkErrors: GIFTResult[] = parsedText.map((item) =>
+    item.error !== null ? error(item as ErrorResult) : (item as ParseResult)
   );
 
   const correctMessages = checkErrors.map((item) =>
-    item.error !== null ? message(cleanText, item, lineEnding) : item
+    item.error !== null
+      ? message(cleanText, item, detectNewLine.graceful(text))
+      : item
   );
 
-  return reduceToSyntaxErrors(correctMessages);
+  return reduceToGIFTSyntaxErrors(correctMessages);
 }
 
 /**
@@ -165,12 +176,14 @@ export function parser(text: string): SyntaxError[] {
  * @param array Parsed input.
  * @returns An array of syntax errors.
  */
-function reduceToSyntaxErrors(array: (IParse | IErrorArr)[]): SyntaxError[] {
+function reduceToGIFTSyntaxErrors(array: GIFTResult[]): GIFTSyntaxError[] {
   const emptyorSpaces = /^\s*$/g;
-  const output: SyntaxError[] = [];
+  const output: GIFTSyntaxError[] = [];
   for (let item of array) {
     if (item.error !== null && !item.text.match(emptyorSpaces)) {
-      item.error.forEach((item) => output.push(item));
+      for (let error of item.error) {
+        output.push(error);
+      }
     }
   }
 

@@ -1,6 +1,8 @@
 import { Expectation, IFileRange, SyntaxError } from "./parser/parser";
 
-interface IError {
+type GIFTSyntaxError = SyntaxError;
+
+interface ErrorResult {
   start: number;
   end: number;
   text: string;
@@ -8,7 +10,7 @@ interface IError {
   error: SyntaxError;
 }
 
-interface IErrorArr {
+interface ErrorResultArr {
   start: number;
   end: number;
   text: string;
@@ -16,7 +18,7 @@ interface IErrorArr {
   error: SyntaxError[];
 }
 
-interface IParse {
+interface ParseResult {
   start: number;
   end: number;
   text: string;
@@ -24,15 +26,13 @@ interface IParse {
   error: null;
 }
 
-type IResult = IParse | IError;
-
-interface Parse {
+interface CharToken {
   token: string;
   line: number;
   char: number;
 }
 
-type TextToken =
+type LineToken =
   | "SCOPE_OPEN"
   | "SCOPE_CLOSED"
   | "EMPTY_LINE"
@@ -44,3 +44,5 @@ interface TextSplit {
   end: number;
   text: string;
 }
+
+type GIFTResult = ParseResult | ErrorResultArr;

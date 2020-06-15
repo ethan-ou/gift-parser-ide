@@ -1,4 +1,4 @@
-import { TextToken } from "../types";
+import { LineToken } from "../types";
 
 /**
  * Discards any empty lines inside a scope.
@@ -11,11 +11,11 @@ import { TextToken } from "../types";
  * @param length Number of lines in file.
  */
 export function noEmptyLinesInScope(
-  array: TextToken[],
-  singleScope: TextToken[],
+  array: LineToken[],
+  singleScope: LineToken[],
   length: number
-): TextToken[] {
-  const output: TextToken[] = [];
+): LineToken[] {
+  const output: LineToken[] = [];
   let scope = false;
   for (let i = 0; i < length; i++) {
     if (array[i] === "SCOPE_OPEN") {
