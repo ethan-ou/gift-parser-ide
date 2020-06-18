@@ -24,7 +24,7 @@ export default class Parser {
   private output: GIFTSyntaxError[];
   private text: string;
   private split: TextSplit[];
-  private incompleteParseOutput: (ParseResult | ErrorResultArr)[];
+  private incompleteParseOutput: GIFTResult[];
 
   /**
    * Create a new Parser object.
