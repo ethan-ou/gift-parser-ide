@@ -1,6 +1,5 @@
 import eol from "eol";
 import { diff } from "deep-diff";
-import detectNewLine from "detect-newline";
 import split from "./split";
 import parse from "./parser";
 import error from "./error";
@@ -8,12 +7,18 @@ import clean from "./clean";
 import {
   ErrorResult,
   ParseResult,
-  ErrorResultArr,
   TextSplit,
   GIFTSyntaxError,
   GIFTResult,
 } from "./types";
-import message from "./message";
+import {
+  filterErrors,
+  findErrors,
+  fixMessagesCurried,
+  parseTextSplit,
+  reduceErrors,
+  pipe,
+} from "./utils";
 
 /**
  * Incremental error parser for Moodle's GIFT format. Create a parser
@@ -22,7 +27,6 @@ import message from "./message";
  */
 export default class Parser {
   private output: GIFTSyntaxError[];
-  private text: string;
   private split: TextSplit[];
   private incompleteParseOutput: GIFTResult[];
 
@@ -30,7 +34,6 @@ export default class Parser {
    * Create a new Parser object.
    */
   constructor() {
-    this.text = "";
     this.split = [];
     this.incompleteParseOutput = [];
     this.output = [];
@@ -46,20 +49,18 @@ export default class Parser {
    * errors.
    */
   public update(text: string): GIFTSyntaxError[] {
-    const cleanText = eol.lf(text);
+    const fixMessages = fixMessagesCurried(text);
 
-    const processText = clean(cleanText);
-    const newSplit = split(processText);
+    const newSplit = pipe(eol.lf, clean, split)(text);
+    this.diff(newSplit, this.split, this.incompleteParseOutput);
 
-    this.diff(newSplit);
-
-    this.text = cleanText;
     this.split = newSplit;
-    this.output = this.correctMessages(
-      this.incompleteParseOutput,
-      this.text,
-      detectNewLine.graceful(text)
-    );
+    this.output = pipe(
+      filterErrors,
+      fixMessages,
+      reduceErrors
+    )(this.incompleteParseOutput);
+
     return this.output;
   }
 
@@ -69,8 +70,12 @@ export default class Parser {
    * within a text document.
    * @param newSplit An array of TextSplit objects.
    */
-  private diff(newSplit: TextSplit[]) {
-    const diffArray = diff(this.split, newSplit);
+  private diff(
+    newSplit: TextSplit[],
+    oldSplit: TextSplit[],
+    changeArray: GIFTResult[]
+  ) {
+    const diffArray = diff(oldSplit, newSplit);
 
     if (!diffArray) {
       return;
@@ -83,18 +88,15 @@ export default class Parser {
         let diffKey = diff?.path && diff.path[1];
 
         if (diffKey === "text") {
-          this.incompleteParseOutput[diffIndex] = this.parse(
-            newSplit[diffIndex]
-          );
+          changeArray[diffIndex] = this.parse(newSplit[diffIndex]);
         }
 
         if (diffKey === "start") {
-          this.incompleteParseOutput[diffIndex].start =
-            newSplit[diffIndex].start;
+          changeArray[diffIndex].start = newSplit[diffIndex].start;
         }
 
         if (diffKey === "end") {
-          this.incompleteParseOutput[diffIndex].end = newSplit[diffIndex].end;
+          changeArray[diffIndex].end = newSplit[diffIndex].end;
         }
       }
 
@@ -102,14 +104,12 @@ export default class Parser {
       if (diff.kind === "A") {
         // New Item
         if (diff.item.kind === "N") {
-          this.incompleteParseOutput[diff.index] = this.parse(
-            newSplit[diff.index]
-          );
+          changeArray[diff.index] = this.parse(newSplit[diff.index]);
         }
 
         // Delete Item
         if (diff.item.kind === "D") {
-          this.incompleteParseOutput.splice(diff.index, 1);
+          changeArray.splice(diff.index, 1);
         }
       }
     }
@@ -127,18 +127,6 @@ export default class Parser {
       return parsedText;
     }
   }
-
-  private correctMessages(
-    parseArray: GIFTResult[],
-    text: string,
-    lineEnding: string
-  ) {
-    const correctMessages: GIFTResult[] = parseArray.map((item) =>
-      item.error !== null ? message(text, item, lineEnding) : item
-    );
-
-    return reduceToGIFTSyntaxErrors(correctMessages);
-  }
 }
 
 /**
@@ -150,42 +138,16 @@ export default class Parser {
  */
 
 export function parser(text: string): GIFTSyntaxError[] {
-  const cleanText = eol.lf(text);
+  const fixMessages = fixMessagesCurried(text);
 
-  const processText = clean(cleanText);
+  const process = pipe(eol.lf, clean, split, parseTextSplit)(text);
 
-  const parsedText = split(processText).map((item) => {
-    return { ...parse(item.text), ...item };
-  });
+  const postProcessErrors = pipe(
+    filterErrors,
+    findErrors,
+    fixMessages,
+    reduceErrors
+  )(process);
 
-  const checkErrors: GIFTResult[] = parsedText.map((item) =>
-    item.error !== null ? error(item as ErrorResult) : (item as ParseResult)
-  );
-
-  const correctMessages = checkErrors.map((item) =>
-    item.error !== null
-      ? message(cleanText, item, detectNewLine.graceful(text))
-      : item
-  );
-
-  return reduceToGIFTSyntaxErrors(correctMessages);
-}
-
-/**
- * Reduces an array of internal Parse and ErrorArr objects to syntax errors.
- * @param array Parsed input.
- * @returns An array of syntax errors.
- */
-function reduceToGIFTSyntaxErrors(array: GIFTResult[]): GIFTSyntaxError[] {
-  const emptyorSpaces = /^\s*$/g;
-  const output: GIFTSyntaxError[] = [];
-  for (let item of array) {
-    if (item.error !== null && !item.text.match(emptyorSpaces)) {
-      for (let error of item.error) {
-        output.push(error);
-      }
-    }
-  }
-
-  return output;
+  return postProcessErrors;
 }
