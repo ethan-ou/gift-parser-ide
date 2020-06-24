@@ -1,6 +1,6 @@
 {
   "name": "gift-parser-ide",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A parser for Moodle's GIFT format designed for error checking in IDE's.",
   "main": "out/index.js",
   "scripts": {
