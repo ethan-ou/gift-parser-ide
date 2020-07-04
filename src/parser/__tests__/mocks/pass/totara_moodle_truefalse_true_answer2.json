@@ -1,1 +1,15 @@
-{"type":"parse","parse":[{"type":"TF","title":"2-08 TSL","stem":{"format":"moodle","text":"TSL is blablabla."},"hasEmbeddedAnswers":false,"globalFeedback":null,"isTrue":true,"incorrectFeedback":null,"correctFeedback":null}]}
+{
+  "type": "parse",
+  "parse": [
+    {
+      "type": "TF",
+      "title": "2-08 TSL",
+      "stem": { "format": "moodle", "text": "TSL is blablabla." },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "isTrue": true,
+      "incorrectFeedback": null,
+      "correctFeedback": null
+    }
+  ]
+}
