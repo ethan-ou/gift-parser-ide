@@ -1,5 +1,4 @@
 import eol from "eol";
-import detectNewLine from "detect-newline";
 import parse from "./parser";
 import error from "./error";
 import {
@@ -35,7 +34,7 @@ export const filterErrors = (
 ): (ErrorResult | ErrorResultArr)[] => {
   const emptyorSpaces = /^\s*$/g;
   return parseArray.filter(
-    (item) => item.error !== null && !item.text.match(emptyorSpaces)
+    (item) => item.type === "error" && !item.text.match(emptyorSpaces)
   ) as (ErrorResult | ErrorResultArr)[];
 };
 
@@ -57,11 +56,12 @@ export const findErrors = (parseArray: ErrorResult[]) => {
  * @param originalText The original input text.
  * @returns An array of ErrorResultArr[]
  */
-export const fixMessagesCurried = (originalText: string) => (
-  parseArray: ErrorResultArr[]
-): ErrorResultArr[] => {
+export const fixMessagesCurried = (
+  originalText: string,
+  lineType: "\r\n" | "\n"
+) => (parseArray: ErrorResultArr[]): ErrorResultArr[] => {
   const fixMessage = (item: ErrorResultArr) =>
-    message(eol.lf(originalText), item, detectNewLine.graceful(originalText));
+    message(eol.lf(originalText), item, lineType);
 
   return parseArray.map((item) => fixMessage(item));
 };

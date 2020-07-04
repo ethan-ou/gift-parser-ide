@@ -1,18 +1,1 @@
-{
-  "parse": [
-    {
-      "type": "TF",
-      "title": null,
-      "stem": {
-        "format": "html",
-        "text": "<p>Grant is buried in Grant's tomb.</p>"
-      },
-      "hasEmbeddedAnswers": false,
-      "globalFeedback": null,
-      "isTrue": false,
-      "incorrectFeedback": null,
-      "correctFeedback": null
-    }
-  ],
-  "error": null
-}
+{"type":"parse","parse":[{"type":"TF","title":null,"stem":{"format":"html","text":"<p>Grant is buried in Grant's tomb.</p>"},"hasEmbeddedAnswers":false,"globalFeedback":null,"isTrue":false,"incorrectFeedback":null,"correctFeedback":null}]}

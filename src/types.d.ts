@@ -2,28 +2,39 @@ import { Expectation, IFileRange, SyntaxError } from "./parser/parser";
 
 type GIFTSyntaxError = SyntaxError;
 
-interface ErrorResult {
-  start: number;
-  end: number;
-  text: string;
-  parse: null;
-  error: SyntaxError;
-}
+type ParseType = "parse" | "error";
 
-interface ErrorResultArr {
-  start: number;
-  end: number;
-  text: string;
-  parse: null;
-  error: SyntaxError[];
-}
-
-interface ParseResult {
-  start: number;
-  end: number;
-  text: string;
+interface ParseReturn {
+  type: Extract<"parse", ParseType>;
   parse: any;
-  error: null;
+}
+
+interface ErrorReturn {
+  type: Extract<"error", ParseType>;
+  error: GIFTSyntaxError;
+}
+
+interface ErrorReturnArr {
+  type: Extract<"error", ParseType>;
+  error: GIFTSyntaxError[];
+}
+
+interface ErrorResult extends ErrorReturn {
+  start: number;
+  end: number;
+  text: string;
+}
+
+interface ErrorResultArr extends ErrorReturnArr {
+  start: number;
+  end: number;
+  text: string;
+}
+
+interface ParseResult extends ParseReturn {
+  start: number;
+  end: number;
+  text: string;
 }
 
 interface CharToken {

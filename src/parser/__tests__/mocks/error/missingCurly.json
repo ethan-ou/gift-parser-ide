@@ -1,5 +1,5 @@
 {
-  "parse": null,
+  "type": "error",
   "error": {
     "message": "Expected \"}\", Single short answer { ... }, {#... }, {= match1 -> Match1\n...}, {=correct choice ~incorrect choice ... }, or {T} or {F} or {True} or {False} but end of input found.",
     "expected": [

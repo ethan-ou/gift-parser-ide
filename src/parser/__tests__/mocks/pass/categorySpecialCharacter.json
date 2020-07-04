@@ -1,9 +1,1 @@
-{
-  "parse": [
-    {
-      "type": "Category",
-      "title": "$course$/top/Default for Unit 1: Topic"
-    }
-  ],
-  "error": null
-}
+{"type":"parse","parse":[{"type":"Category","title":"$course$/top/Default for Unit 1: Topic"}]}

@@ -1,5 +1,6 @@
 import eol from "eol";
 import { diff } from "deep-diff";
+import detectNewLine from "detect-newline";
 import split from "./split";
 import parse from "./parser";
 import error from "./error";
@@ -49,7 +50,7 @@ export default class Parser {
    * errors.
    */
   public update(text: string): GIFTSyntaxError[] {
-    const fixMessages = fixMessagesCurried(text);
+    const fixMessages = fixMessagesCurried(text, detectNewLine.graceful(text));
 
     const newSplit = pipe(eol.lf, clean, split)(text);
     this.diff(newSplit, this.split, this.incompleteParseOutput);
@@ -121,11 +122,7 @@ export default class Parser {
       ...item,
     };
 
-    if (parsedText.error !== null) {
-      return error(parsedText);
-    } else {
-      return parsedText;
-    }
+    return parsedText.type === "parse" ? parsedText : error(parsedText);
   }
 }
 
@@ -138,9 +135,14 @@ export default class Parser {
  */
 
 export function parser(text: string): GIFTSyntaxError[] {
-  const fixMessages = fixMessagesCurried(text);
+  const fixMessages = fixMessagesCurried(text, detectNewLine.graceful(text));
 
-  const process = pipe(eol.lf, clean, split, parseTextSplit)(text);
+  const process: (ParseResult | ErrorResult)[] = pipe(
+    eol.lf,
+    clean,
+    split,
+    parseTextSplit
+  )(text);
 
   const postProcessErrors = pipe(
     filterErrors,

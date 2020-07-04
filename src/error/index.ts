@@ -27,7 +27,7 @@ export default function (message: ErrorResult): ErrorResultArr {
 
       let newError = parser(findToken);
 
-      if (newError.error !== null) {
+      if (newError.type === "error") {
         errors.push(newError.error);
         i++;
       } else {

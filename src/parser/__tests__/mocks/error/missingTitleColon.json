@@ -1,5 +1,5 @@
 {
-  "parse": null,
+  "type": "error",
   "error": {
     "message": "Expected \"{\", :: Title ::, Category, Description, or Question stem but \":\" found.",
     "expected": [

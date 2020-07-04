@@ -1,5 +1,5 @@
 import { parse as parser } from "./parser";
-import { GIFTSyntaxError } from "../types";
+import { ParseReturn, ErrorReturn } from "../types";
 
 /**
  * Parse the text using the GIFT
@@ -9,14 +9,12 @@ import { GIFTSyntaxError } from "../types";
  * or a syntax error.
  */
 
-export default function (
-  text: string
-): { parse: any; error: GIFTSyntaxError | null } {
+export default function (text: string): ParseReturn | ErrorReturn {
   try {
-    return { parse: parser(text), error: null };
+    return { type: "parse", parse: parser(text) };
   } catch (error) {
     return {
-      parse: null,
+      type: "error",
       error: error,
     };
   }

@@ -1,15 +1,1 @@
-{
-  "parse": [
-    {
-      "type": "Essay",
-      "title": null,
-      "stem": {
-        "format": "moodle",
-        "text": "Write a short biography of Dag Hammarskjöld."
-      },
-      "hasEmbeddedAnswers": false,
-      "globalFeedback": null
-    }
-  ],
-  "error": null
-}
+{"type":"parse","parse":[{"type":"Essay","title":null,"stem":{"format":"moodle","text":"Write a short biography of Dag Hammarskjöld."},"hasEmbeddedAnswers":false,"globalFeedback":null}]}

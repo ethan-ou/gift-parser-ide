@@ -1,5 +1,5 @@
 {
-  "parse": null,
+  "type": "error",
   "error": {
     "message": "Expected \"}\" but \"~\" found.",
     "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
