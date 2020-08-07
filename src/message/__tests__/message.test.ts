@@ -24,7 +24,7 @@ describe("Message Module: Mocks", () => {
     const text = fs.readFileSync(filePath, "utf-8");
     const json = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
 
-    //fs.writeFileSync(expectedPath, JSON.stringify(message(text, json, "\n")));
+    fs.writeFileSync(expectedPath, JSON.stringify(message(text, json, "\n")));
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
     it(`Parses ${file}`, () => {

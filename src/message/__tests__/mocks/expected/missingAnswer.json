@@ -1,6 +1,5 @@
 {
-  "parse": null,
-  "error": [
+  "result": [
     {
       "message": "Expected \"}\" but \"~\" found.",
       "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
@@ -34,5 +33,6 @@
   ],
   "start": 1,
   "end": 6,
-  "text": "Question {\n    Correct Answer\n    ~Incorrect Answer 1\n    ~Incorrect Answer 2\n    ~Incorrect Answer 3\n}"
+  "text": "Question {\n    Correct Answer\n    ~Incorrect Answer 1\n    ~Incorrect Answer 2\n    ~Incorrect Answer 3\n}",
+  "type": "error"
 }

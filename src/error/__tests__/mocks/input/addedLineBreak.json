@@ -1,6 +1,5 @@
 {
-  "parse": null,
-  "error": {
+  "result": {
     "message": "Expected \"}\" but \"\\n\" found.",
     "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
     "found": "\n",
@@ -12,5 +11,6 @@
   },
   "start": 1,
   "end": 4,
-  "text": "::New Question:: {\n    =An answer\n    \n}"
+  "text": "::New Question:: {\n    =An answer\n    \n}",
+  "type": "error"
 }

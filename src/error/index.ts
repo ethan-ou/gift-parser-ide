@@ -16,7 +16,7 @@ export default function (message: ErrorResult): ErrorResultArr {
   const errors: GIFTSyntaxError[] = [];
 
   stack.push(message.text);
-  errors.push(message.error);
+  errors.push(message.result);
 
   try {
     let i = 0;
@@ -28,7 +28,7 @@ export default function (message: ErrorResult): ErrorResultArr {
       let newError = parser(findToken);
 
       if (newError.type === "error") {
-        errors.push(newError.error);
+        errors.push(newError.result);
         i++;
       } else {
         throw new Error("Finished");
@@ -38,6 +38,6 @@ export default function (message: ErrorResult): ErrorResultArr {
 
   return {
     ...message,
-    error: errors,
+    result: errors,
   };
 }

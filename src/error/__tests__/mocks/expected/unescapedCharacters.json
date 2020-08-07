@@ -1,6 +1,5 @@
 {
-  "parse": null,
-  "error": [
+  "result": [
     {
       "message": "Expected \"}\" but \"#\" found.",
       "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
@@ -44,5 +43,6 @@
   ],
   "start": 1,
   "end": 12,
-  "text": "::GIFT Control Characters::\nWhich of the following is NOT a control character for the GIFT import format? {\n  ~ \\~     # \\~ is a control character.\n  ~ \\=     # \\= is a control character.\n  ~ \\#     # # is a control character.\n  ~ {     # \\{ is a control character.\n  ~ \\}     # \\} is a control character.\n  ~ \\:     # \\: is a control character.\n  = \\      # Correct! \\ (backslash) is not a control character. BUT,\n             it is used to escape the control characters.\n}"
+  "text": "::GIFT Control Characters::\nWhich of the following is NOT a control character for the GIFT import format? {\n  ~ \\~     # \\~ is a control character.\n  ~ \\=     # \\= is a control character.\n  ~ \\#     # # is a control character.\n  ~ {     # \\{ is a control character.\n  ~ \\}     # \\} is a control character.\n  ~ \\:     # \\: is a control character.\n  = \\      # Correct! \\ (backslash) is not a control character. BUT,\n             it is used to escape the control characters.\n}",
+  "type": "error"
 }

@@ -1,6 +1,6 @@
 {
-  "type": "parse",
-  "parse": [
+  "type": "result",
+  "result": [
     {
       "type": "MC",
       "title": "EE_mod_05_T39_P079",

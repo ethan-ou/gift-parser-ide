@@ -75,7 +75,7 @@ export const fixMessagesCurried = (
 export function reduceErrors(array: ErrorResultArr[]): GIFTSyntaxError[] {
   const output: GIFTSyntaxError[] = [];
   for (let item of array) {
-    for (let error of item.error) {
+    for (let error of item.result) {
       output.push(error);
     }
   }

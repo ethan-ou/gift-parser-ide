@@ -1,6 +1,6 @@
 {
-  "type": "parse",
-  "parse": [
+  "type": "result",
+  "result": [
     {
       "type": "MC",
       "title": "Q2",

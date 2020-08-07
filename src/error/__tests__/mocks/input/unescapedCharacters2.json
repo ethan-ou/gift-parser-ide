@@ -1,6 +1,5 @@
 {
-  "parse": null,
-  "error": {
+  "result": {
     "message": "Expected \"{\" but \"=\" found.",
     "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
     "found": "=",
@@ -12,5 +11,6 @@
   },
   "start": 2,
   "end": 3,
-  "text": "::Q1:: 1+1=2 {T}"
+  "text": "::Q1:: 1+1=2 {T}",
+  "type": "error"
 }

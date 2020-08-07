@@ -122,7 +122,7 @@ export default class Parser {
       ...item,
     };
 
-    return parsedText.type === "parse" ? parsedText : error(parsedText);
+    return parsedText.type === "result" ? parsedText : error(parsedText);
   }
 }
 

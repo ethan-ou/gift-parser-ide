@@ -11,11 +11,11 @@ import { ParseReturn, ErrorReturn } from "../types";
 
 export default function (text: string): ParseReturn | ErrorReturn {
   try {
-    return { type: "parse", parse: parser(text) };
+    return { type: "result", result: parser(text) };
   } catch (error) {
     return {
       type: "error",
-      error: error,
+      result: error,
     };
   }
 }

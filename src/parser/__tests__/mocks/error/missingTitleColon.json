@@ -1,6 +1,6 @@
 {
   "type": "error",
-  "error": {
+  "result": {
     "message": "Expected \"{\", :: Title ::, Category, Description, or Question stem but \":\" found.",
     "expected": [
       { "type": "other", "description": "Category" },

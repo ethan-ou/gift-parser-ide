@@ -22,7 +22,7 @@ function correctTextSplitMessages(
   text: string,
   message: ErrorResultArr,
   lineEnding: string
-) {
+): ErrorResultArr {
   const newLine = "\n";
   const charNum = text
     .split(newLine)
@@ -33,7 +33,7 @@ function correctTextSplitMessages(
 
   return {
     ...message,
-    error: message.error.map((item) => {
+    result: message.result.map((item) => {
       return incrementError(
         {
           offset: offsetIndex,
@@ -46,13 +46,13 @@ function correctTextSplitMessages(
   };
 }
 
-function correctTokenMessages(message: ErrorResultArr) {
+function correctTokenMessages(message: ErrorResultArr): ErrorResultArr {
   let iterators: { prevLine: undefined | number; count: number } = {
     prevLine: undefined,
     count: 0,
   };
 
-  const corrected = message.error.map((item, index) => {
+  const corrected = message.result.map((item, index) => {
     const { start, end } = item.location;
 
     if (iterators.prevLine === start.line) {
@@ -74,7 +74,7 @@ function correctTokenMessages(message: ErrorResultArr) {
 
   return {
     ...message,
-    error: corrected,
+    result: corrected,
   };
 }
 

@@ -1,5 +1,6 @@
 {
-  "parse": [
+  "type": "result",
+  "result": [
     {
       "type": "MC",
       "title": null,
@@ -58,6 +59,5 @@
         }
       ]
     }
-  ],
-  "type": "parse"
+  ]
 }

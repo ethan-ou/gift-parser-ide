@@ -2,21 +2,21 @@ import { Expectation, IFileRange, SyntaxError } from "./parser/parser";
 
 type GIFTSyntaxError = SyntaxError;
 
-type ParseType = "parse" | "error";
+type ParseType = "result" | "error";
 
 interface ParseReturn {
-  type: Extract<"parse", ParseType>;
-  parse: any;
+  type: Extract<"result", ParseType>;
+  result: any;
 }
 
 interface ErrorReturn {
   type: Extract<"error", ParseType>;
-  error: GIFTSyntaxError;
+  result: GIFTSyntaxError;
 }
 
 interface ErrorReturnArr {
   type: Extract<"error", ParseType>;
-  error: GIFTSyntaxError[];
+  result: GIFTSyntaxError[];
 }
 
 interface ErrorResult extends ErrorReturn {

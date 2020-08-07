@@ -1,6 +1,5 @@
 {
-  "parse": null,
-  "error": {
+  "result": {
     "message": "Expected \"{\", :: Title ::, Category, Description, or Question stem but \":\" found.",
     "expected": [
       { "type": "other", "description": "Category" },
@@ -18,5 +17,6 @@
   },
   "start": 1,
   "end": 5,
-  "text": ":Title:: {\n    =Answer 1\n    ~Answer 2\n    ~Answer 3\n}"
+  "text": ":Title:: {\n    =Answer 1\n    ~Answer 2\n    ~Answer 3\n}",
+  "type": "error"
 }

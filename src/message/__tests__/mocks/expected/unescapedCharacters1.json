@@ -1,6 +1,5 @@
 {
-  "parse": null,
-  "error": [
+  "result": [
     {
       "message": "Expected \"{\" but \"=\" found.",
       "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
@@ -58,5 +57,6 @@
   ],
   "start": 1,
   "end": 4,
-  "text": "::GIFT range of non-escaped symbols::\nHere's a question that has symbols inside, \nsuch as `-=\\[\\];',./~!@#$%^&*()_+{}|\\:\"<>? {True}"
+  "text": "::GIFT range of non-escaped symbols::\nHere's a question that has symbols inside, \nsuch as `-=\\[\\];',./~!@#$%^&*()_+{}|\\:\"<>? {True}",
+  "type": "error"
 }

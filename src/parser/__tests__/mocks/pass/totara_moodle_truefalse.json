@@ -1,6 +1,6 @@
 {
-  "type": "parse",
-  "parse": [
+  "type": "result",
+  "result": [
     {
       "type": "TF",
       "title": "Q1",

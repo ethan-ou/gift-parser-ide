@@ -1,6 +1,5 @@
 {
-  "parse": null,
-  "error": [
+  "result": [
     {
       "message": "Expected \"}\", Single short answer { ... }, {#... }, {= match1 -> Match1\n...}, {=correct choice ~incorrect choice ... }, or {T} or {F} or {True} or {False} but end of input found.",
       "expected": [
@@ -24,5 +23,6 @@
   ],
   "start": 1,
   "end": 1,
-  "text": "A single line scope {"
+  "text": "A single line scope {",
+  "type": "error"
 }

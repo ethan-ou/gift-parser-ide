@@ -1,6 +1,5 @@
 {
-  "parse": null,
-  "error": [
+  "result": [
     {
       "message": "Expected \"}\" but \":\" found.",
       "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
@@ -34,5 +33,6 @@
   ],
   "start": 1,
   "end": 5,
-  "text": "::Question with Links:: {\n    =<img src\\=https://images.unsplash.com/photo-1591708318668-3ac92210fbb0>\n    ~<img src\\=https://images.unsplash.com/photo-1587613990051-1b291c1a7080>\n    ~<img src\\=https://images.unsplash.com/photo-1591880907925-e8a75dc8cc1d>\n}"
+  "text": "::Question with Links:: {\n    =<img src\\=https://images.unsplash.com/photo-1591708318668-3ac92210fbb0>\n    ~<img src\\=https://images.unsplash.com/photo-1587613990051-1b291c1a7080>\n    ~<img src\\=https://images.unsplash.com/photo-1591880907925-e8a75dc8cc1d>\n}",
+  "type": "error"
 }

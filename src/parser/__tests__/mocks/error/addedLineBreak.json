@@ -1,6 +1,6 @@
 {
   "type": "error",
-  "error": {
+  "result": {
     "message": "Expected \"}\" but \"\\n\" found.",
     "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
     "found": "\n",
