@@ -19,10 +19,9 @@ describe("Split Module", () => {
     const text = fs.readFileSync(filePath, "utf-8");
 
     // Write new tests to directory.
-    // fs.writeFileSync(expectedPath, JSON.stringify(split(text)));
+    //fs.writeFileSync(expectedPath, JSON.stringify(split(text)));
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
-
     it(`Parses ${file}`, () => {
       expect(split(text)).toEqual(expected);
     });

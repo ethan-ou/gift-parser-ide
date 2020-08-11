@@ -1,12 +1,12 @@
 [
   {
     "start": 1,
-    "end": 7,
+    "end": 6,
     "text": "Question {\n    =Correct Answer\n    ~Incorrect Answer 1\n    ~Incorrect Answer 2\n    ~Incorrect Answer 3\n}"
   },
   {
     "start": 13,
-    "end": 19,
+    "end": 18,
     "text": "Question {\n    =Item 1 -> Match 1\n    =Item 2 -> Match 2\n    =Item 3 -> Match 3\n    =Item 4 -> Match 4\n}"
   }
 ]

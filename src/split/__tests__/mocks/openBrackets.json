@@ -1,13 +1,13 @@
 [
   {
     "start": 1,
-    "end": 4,
+    "end": 3,
     "text": "::This is a real question:: {\n    Normally there's content in here.\n}"
   },
-  { "start": 5, "end": 8, "text": "But not today. {\n\n}" },
+  { "start": 5, "end": 7, "text": "But not today. {\n\n}" },
   {
     "start": 9,
-    "end": 16,
+    "end": 15,
     "text": "Oh look a missing bracket! {\n    \n    \n    \nAnd another question {\n    \n}"
   }
 ]

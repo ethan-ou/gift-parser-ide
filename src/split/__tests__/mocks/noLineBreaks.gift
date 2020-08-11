@@ -1,0 +1,15 @@
+::Another Question:: Hello {
+This is }
+Another question {}
+
+Hello all {
+    =Answer
+
+::Title:: Question { =Answer }
+
+Question {
+    =Correct Answer
+    ~Incorrect Answer 1
+    ~Incorrect Answer 2
+    ~Incorrect Answer 3
+}

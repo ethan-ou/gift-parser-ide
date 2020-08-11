@@ -43,13 +43,6 @@ interface CharToken {
   char: number;
 }
 
-type LineToken =
-  | "SCOPE_OPEN"
-  | "SCOPE_CLOSED"
-  | "EMPTY_LINE"
-  | "SCOPE"
-  | undefined;
-
 interface TextSplit {
   start: number;
   end: number;
