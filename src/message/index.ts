@@ -53,8 +53,7 @@ function correctTokenMessages(message: ErrorResultArr): ErrorResultArr {
   };
 
   const corrected = message.result.map((item, index) => {
-    const start = item.location.start;
-    const end = item.location.end;
+    const { start, end } = item?.location;
 
     if (iterators.prevLine === start.line) {
       iterators.count++;
