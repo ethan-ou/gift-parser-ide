@@ -37,12 +37,6 @@ interface ParseResult extends ParseReturn {
   text: string;
 }
 
-interface CharToken {
-  token: string;
-  line: number;
-  char: number;
-}
-
 interface TextSplit {
   start: number;
   end: number;
