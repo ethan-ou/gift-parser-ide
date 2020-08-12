@@ -221,11 +221,11 @@ function correctToken(message: ErrorResultArr): ErrorResultArr {
       const start = item?.location?.start;
       const end = item?.location?.end;
 
-      iter.prevLine === start.line
+      iter.prevLine === start?.line
         ? iter.count++
-        : ((iter.count = 0), (iter.prevLine = start.line));
+        : ((iter.count = 0), (iter.prevLine = start?.line));
 
-      return end.line > start.line
+      return end?.line > start?.line
         ? removeOffset(index, removeColumnStart(iter.count, item))
         : removeOffset(index, removeColumn(iter.count, item));
     }),
