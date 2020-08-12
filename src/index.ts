@@ -19,9 +19,13 @@ export default class GIFTParser {
   /**
    * Create a new Parser object.
    */
-  constructor() {
+  constructor(text?: string) {
     this._split = [];
     this._parse = [];
+
+    if (text) {
+      this.update(text);
+    }
   }
 
   /**
