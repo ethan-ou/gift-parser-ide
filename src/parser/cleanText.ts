@@ -4,13 +4,13 @@
  * @param text The cleaned input text.
  */
 
-export default function clean(text: string): string {
-  const newLine = "\n";
+export default function cleanText(text: string): string {
+  const NEWLINE = "\n";
   const splitText = text
-    .split(newLine)
+    .split(NEWLINE)
     .map((comment) => removeComment(comment));
 
-  const fullText = splitText.join(newLine);
+  const fullText = splitText.join(NEWLINE);
   return fullText;
 }
 

@@ -9,7 +9,7 @@ import { TextSplit } from "../types";
  * @returns An array of objects with start and end
  * line numbers, and the split text.
  */
-export default function split(text: string): TextSplit[] {
+export default function textSplit(text: string): TextSplit[] {
   const NEWLINE = "\n";
   const out: TextSplit[] = [];
 

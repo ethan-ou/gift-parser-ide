@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import clean from "../index";
+import textSplit from "../../parser/textSplit";
 
-describe("Clean Text", () => {
-  const folderPath = path.join(__dirname, "/mocks");
+describe("Split Module", () => {
+  const folderPath = path.join(__dirname, "/mocks/textSplit");
 
   const files = fs
     .readdirSync(folderPath, "utf-8")
@@ -19,12 +19,11 @@ describe("Clean Text", () => {
     const text = fs.readFileSync(filePath, "utf-8");
 
     // Write new tests to directory.
-    // fs.writeFileSync(expectedPath, JSON.stringify(clean(text)));
+    //fs.writeFileSync(expectedPath, JSON.stringify(split(text)));
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
-
     it(`Parses ${file}`, () => {
-      expect(clean(text)).toEqual(expected);
+      expect(textSplit(text)).toEqual(expected);
     });
   });
 });

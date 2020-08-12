@@ -65,60 +65,60 @@ const text1 = `// true/false
 function ClassParser(text, text1) {
   const GIFTParser = new Parse();
 
-  GIFTParser.update(text);
+  GIFTParser.update(text).result();
   const parseUpdate1 = performance.now();
-  GIFTParser.update(text1);
+  GIFTParser.update(text1).result();
   const parseUpdate2 = performance.now();
   console.log("Class Update:", parseUpdate2 - parseUpdate1);
 
-  GIFTParser.update("");
+  GIFTParser.update("").result();
 
   const parseOnce1 = performance.now();
-  GIFTParser.update(text);
+  GIFTParser.update(text).result();
   const parseOnce2 = performance.now();
   console.log("Class Parse Once:", parseOnce2 - parseOnce1);
 
-  GIFTParser.update("");
+  GIFTParser.update("").result();
 
   const parseFifty1 = performance.now();
   for (var i = 0; i < 50; i++) {
-    GIFTParser.update(text);
+    GIFTParser.update(text).result();
   }
   const parseFifty2 = performance.now();
   console.log("Class Parse Fifty:", parseFifty2 - parseFifty1);
 
-  GIFTParser.update("");
+  GIFTParser.update("").result();
 
   const parseHundred1 = performance.now();
   for (var i = 0; i < 100; i++) {
-    GIFTParser.update(text);
+    GIFTParser.update(text).result();
   }
   const parseHundred2 = performance.now();
   console.log("Class Parse Hundred:", parseHundred2 - parseHundred1);
 }
 
 function functionParser(text, text1) {
-  parser(text);
+  parser.parse(text);
   const parseUpdate1 = performance.now();
-  parser(text1);
+  parser.parse(text1);
   const parseUpdate2 = performance.now();
   console.log("Function Update:", parseUpdate2 - parseUpdate1);
 
   const parseOnce1 = performance.now();
-  parser(text);
+  parser.parse(text);
   const parseOnce2 = performance.now();
   console.log("Function Parse Once:", parseOnce2 - parseOnce1);
 
   const parseFifty1 = performance.now();
   for (var i = 0; i < 50; i++) {
-    parser(text);
+    parser.parse(text);
   }
   const parseFifty2 = performance.now();
   console.log("Function Parse Fifty:", parseFifty2 - parseFifty1);
 
   const parseHundred1 = performance.now();
   for (var i = 0; i < 100; i++) {
-    parser(text);
+    parser.parse(text);
   }
   const parseHundred2 = performance.now();
   console.log("Function Parse Hundred:", parseHundred2 - parseHundred1);

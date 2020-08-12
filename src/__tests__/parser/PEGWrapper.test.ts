@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import parser from "../index";
+import parser from "../../parser/PEGWrapper";
 
 describe("PEG Parser Module: Pass Mocks", () => {
-  const folderPath = path.join(__dirname, "../../__tests__/mocks/pass");
+  const folderPath = path.join(__dirname, "../mocks/main/pass");
 
   const files = fs
     .readdirSync(folderPath, "utf-8")
@@ -12,7 +12,7 @@ describe("PEG Parser Module: Pass Mocks", () => {
   files.forEach((file) => {
     const filePath = path.join(folderPath, file);
     const expectedPath = path.join(
-      path.join(__dirname, "/mocks/pass"),
+      path.join(__dirname, "/mocks/PEGWrapper/pass"),
       `${path.basename(file, ".gift")}.json`
     );
 
@@ -30,7 +30,7 @@ describe("PEG Parser Module: Pass Mocks", () => {
 });
 
 describe("PEG Parser Module: Error Mocks", () => {
-  const folderPath = path.join(__dirname, "../../__tests__/mocks/error");
+  const folderPath = path.join(__dirname, "../mocks/main/error");
 
   const files = fs
     .readdirSync(folderPath, "utf-8")
@@ -39,7 +39,7 @@ describe("PEG Parser Module: Error Mocks", () => {
   files.forEach((file) => {
     const filePath = path.join(folderPath, file);
     const expectedPath = path.join(
-      path.join(__dirname, "/mocks/error"),
+      path.join(__dirname, "/mocks/PEGWrapper/error"),
       `${path.basename(file, ".gift")}.json`
     );
 

@@ -1,6 +1,6 @@
-import { Expectation, IFileRange, SyntaxError } from "./parser/parser";
+import { Expectation, IFileRange, SyntaxError } from "./parser/PEGParser";
 
-type GIFTSyntaxError = SyntaxError;
+interface GIFTSyntaxError extends SyntaxError {}
 
 type ParseType = "result" | "error";
 

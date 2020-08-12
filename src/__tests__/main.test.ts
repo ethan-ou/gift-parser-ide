@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import Parser, { parser } from "../index";
+import GIFTParser, { parser } from "../index";
 
 describe("Exports Parser: Correct Mocks", () => {
-  const folderPath = path.join(__dirname, "/mocks/pass");
+  const folderPath = path.join(__dirname, "/mocks/main/pass");
 
   const files = fs
     .readdirSync(folderPath, "utf-8")
@@ -12,20 +12,28 @@ describe("Exports Parser: Correct Mocks", () => {
   files.forEach((file) => {
     const filePath = path.join(folderPath, file);
     const text = fs.readFileSync(filePath, "utf-8");
+    const expectedPath = path.join(
+      folderPath,
+      `${path.basename(file, ".gift")}.json`
+    );
+
+    const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
     it(`Class Error Parser: ${file}`, () => {
-      const GIFTParser = new Parser();
-      expect(GIFTParser.update(text)).toEqual([]);
+      const Parser = new GIFTParser();
+      expect(Parser.update(text).errorOnly()).toEqual([]);
+      expect(Parser.update(text).parseOnly()).toEqual(expected);
     });
 
     it(`Function Error Parser: ${file}`, () => {
-      expect(parser(text)).toEqual([]);
+      expect(parser.errorOnly(text)).toEqual([]);
+      expect(parser.parseOnly(text)).toEqual(expected);
     });
   });
 });
 
 describe("Exports Parser: Error Mocks", () => {
-  const folderPath = path.join(__dirname, "/mocks/error");
+  const folderPath = path.join(__dirname, "/mocks/main/error");
 
   const files = fs
     .readdirSync(folderPath, "utf-8")
@@ -47,25 +55,25 @@ describe("Exports Parser: Error Mocks", () => {
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
     it(`Class Error Parser: ${file}`, () => {
-      const GIFTParser = new Parser();
-      expect(GIFTParser.update(text)).toEqual(expected);
+      const Parser = new GIFTParser();
+      expect(Parser.update(text).errorOnly()).toEqual(expected);
     });
 
     it(`Function Error Parser: ${file}`, () => {
-      expect(parser(text)).toEqual(expected);
+      expect(parser.errorOnly(text)).toEqual(expected);
     });
   });
 });
 
 // Simulates situation with incremental parsing.
 describe("Exports Parser: Incremental Parsing Mocks", () => {
-  const folderPath = path.join(__dirname, "/mocks/incremental");
+  const folderPath = path.join(__dirname, "/mocks/main/incremental");
 
   const files = fs
     .readdirSync(folderPath, "utf-8")
     .filter((file) => path.extname(file) === ".gift");
 
-  const GIFTParser = new Parser();
+  const Parser = new GIFTParser();
 
   files.forEach((file) => {
     const filePath = path.join(folderPath, file);
@@ -81,7 +89,7 @@ describe("Exports Parser: Incremental Parsing Mocks", () => {
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
     it(`Class Incremental Parsing: ${file}`, () => {
-      expect(GIFTParser.update(text)).toEqual(expected);
+      expect(Parser.update(text).errorOnly()).toEqual(expected);
     });
   });
 });

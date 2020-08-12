@@ -8,7 +8,7 @@ var grammar =
   "https://raw.githubusercontent.com/fuhrmanator/GIFT-grammar-PEG.js/master/GIFT.pegjs";
 
 var downloadLocation = path.join(__dirname, "/GIFT.pegjs");
-var parserLocation = path.join(__dirname, "../src/parser/parser.ts");
+var parserLocation = path.join(__dirname, "../src/parser/PEGParser.ts");
 
 var injectText = "// @ts-nocheck \n";
 
