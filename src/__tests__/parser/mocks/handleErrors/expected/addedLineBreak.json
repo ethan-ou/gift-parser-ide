@@ -1,1 +1,18 @@
-{"result":[{"message":"Expected \"}\" but \"\\n\" found.","expected":[{"type":"literal","text":"}","ignoreCase":false}],"found":"\n","location":{"start":{"offset":33,"line":2,"column":15},"end":{"offset":34,"line":3,"column":1}},"name":"SyntaxError"}],"start":1,"end":4,"text":"::New Question:: {\n    =An answer\n    \n}","type":"error"}
+{
+  "result": [
+    {
+      "message": "Expected \"}\" but \"\\n\" found.",
+      "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+      "found": "\n",
+      "location": {
+        "start": { "offset": 33, "line": 2, "column": 15 },
+        "end": { "offset": 34, "line": 3, "column": 1 }
+      },
+      "name": "SyntaxError"
+    }
+  ],
+  "start": 1,
+  "end": 4,
+  "text": "::New Question:: {\n    =An answer\n    \n}",
+  "type": "error"
+}
