@@ -217,17 +217,16 @@ function correctToken(message: ErrorResultArr): ErrorResultArr {
 
   return {
     ...message,
-    result: message.result.map((item, index) => {
-      const start = item?.location?.start;
-      const end = item?.location?.end;
+    result: message.result.map((item, idx) => {
+      const { start, end } = item.location;
 
-      iter.prevLine === start?.line
+      iter.prevLine === start.line
         ? iter.count++
         : ((iter.count = 0), (iter.prevLine = start?.line));
 
-      return end?.line > start?.line
-        ? removeOffset(index, removeColumnStart(iter.count, item))
-        : removeOffset(index, removeColumn(iter.count, item));
+      return end.line > start.line
+        ? removeOffset(idx, removeColumnStart(iter.count, item))
+        : removeOffset(idx, removeColumn(iter.count, item));
     }),
   };
 }

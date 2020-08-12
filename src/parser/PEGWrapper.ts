@@ -1,4 +1,4 @@
-import { parse } from "./PEGParser";
+import { parse, SyntaxError } from "./PEGParser";
 import { ParseReturn, ErrorReturn } from "../types";
 
 /**
@@ -9,13 +9,17 @@ import { ParseReturn, ErrorReturn } from "../types";
  * or a syntax error.
  */
 
-export default function parser(text: string): ParseReturn | ErrorReturn {
+export default function PEGWrapper(text: string): ParseReturn | ErrorReturn {
   try {
     return { type: "result", result: parse(text) };
   } catch (error) {
-    return {
-      type: "error",
-      result: error,
-    };
+    if (error.name === "SyntaxError") {
+      return {
+        type: "error",
+        result: error,
+      };
+    } else {
+      throw new Error("Parser not compatible with Node or Javascript Version.");
+    }
   }
 }
