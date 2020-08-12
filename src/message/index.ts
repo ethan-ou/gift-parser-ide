@@ -14,71 +14,61 @@ export default function message(
   message: ErrorResultArr,
   lineEnding: string
 ): ErrorResultArr {
-  const columnCorrected = correctTokenMessages(message);
-  return correctTextSplitMessages(originalText, columnCorrected, lineEnding);
+  return correctMessage(originalText, correctToken(message), lineEnding);
 }
 
-function correctTextSplitMessages(
+function correctMessage(
   text: string,
   message: ErrorResultArr,
   lineEnding: string
 ): ErrorResultArr {
-  const newLine = "\n";
-  const charNum = text
-    .split(newLine)
-    .map((string) => string.length + lineEnding.length);
-  const offsetIndex = charNum[message.start - 2]
-    ? charNum[message.start - 2]
+  const NEWLINE = "\n";
+  const charPerLine = text
+    .split(NEWLINE)
+    .map((line) => line.length + lineEnding.length);
+  const offsetIndex = charPerLine[message.start - 2]
+    ? charPerLine[message.start - 2]
     : 0;
 
   return {
     ...message,
-    result: message.result.map((item) => {
-      return incrementError(
+    result: message.result.map((item) =>
+      addError(
         {
           offset: offsetIndex,
           line: message.start - 1,
           column: 0,
         },
         item
-      );
+      )
+    ),
+  };
+}
+
+function correctToken(message: ErrorResultArr): ErrorResultArr {
+  const iter = {
+    prevLine: -1,
+    count: 0,
+  };
+
+  return {
+    ...message,
+    result: message.result.map((item, index) => {
+      const start = item?.location?.start;
+      const end = item?.location?.end;
+
+      iter.prevLine === start.line
+        ? iter.count++
+        : ((iter.count = 0), (iter.prevLine = start.line));
+
+      return end.line > start.line
+        ? removeOffset(index, removeColumnStart(iter.count, item))
+        : removeOffset(index, removeColumn(iter.count, item));
     }),
   };
 }
 
-function correctTokenMessages(message: ErrorResultArr): ErrorResultArr {
-  let iterators: { prevLine: undefined | number; count: number } = {
-    prevLine: undefined,
-    count: 0,
-  };
-
-  const corrected = message.result.map((item, index) => {
-    const { start, end } = item.location;
-
-    if (iterators.prevLine === start.line) {
-      iterators.count++;
-    } else {
-      iterators.count = 0;
-      iterators.prevLine = start.line;
-    }
-
-    let output;
-    if (end.line > start.line) {
-      output = removeColumnStartError(iterators.count, item);
-    } else {
-      output = removeColumnError(iterators.count, item);
-    }
-
-    return removeOffsetError(index, output);
-  });
-
-  return {
-    ...message,
-    result: corrected,
-  };
-}
-
-export function incrementError(
+function addError(
   number: {
     line: number;
     offset: number;
@@ -106,67 +96,7 @@ export function incrementError(
   };
 }
 
-export function incrementColumnError(
-  number: number,
-  message: GIFTSyntaxError
-): GIFTSyntaxError {
-  return {
-    ...message,
-    location: {
-      ...message.location,
-      start: {
-        ...message.location.start,
-        column: message.location.start.column + number,
-      },
-      end: {
-        ...message.location.end,
-        column: message.location.end.column + number,
-      },
-    },
-  };
-}
-
-export function incrementOffsetError(
-  number: number,
-  message: GIFTSyntaxError
-): GIFTSyntaxError {
-  return {
-    ...message,
-    location: {
-      ...message.location,
-      start: {
-        ...message.location.start,
-        offset: message.location.start.offset + number,
-      },
-      end: {
-        ...message.location.end,
-        offset: message.location.end.offset + number,
-      },
-    },
-  };
-}
-
-export function incrementLineError(
-  number: number,
-  message: GIFTSyntaxError
-): GIFTSyntaxError {
-  return {
-    ...message,
-    location: {
-      ...message.location,
-      start: {
-        ...message.location.start,
-        line: message.location.start.line + number,
-      },
-      end: {
-        ...message.location.end,
-        line: message.location.end.line + number,
-      },
-    },
-  };
-}
-
-export function removeOffsetError(
+function removeOffset(
   number: number,
   message: GIFTSyntaxError
 ): GIFTSyntaxError {
@@ -186,27 +116,7 @@ export function removeOffsetError(
   };
 }
 
-export function removeLineError(
-  number: number,
-  message: GIFTSyntaxError
-): GIFTSyntaxError {
-  return {
-    ...message,
-    location: {
-      ...message.location,
-      start: {
-        ...message.location.start,
-        line: message.location.start.line - number,
-      },
-      end: {
-        ...message.location.end,
-        line: message.location.end.line - number,
-      },
-    },
-  };
-}
-
-export function removeColumnError(
+function removeColumn(
   number: number,
   message: GIFTSyntaxError
 ): GIFTSyntaxError {
@@ -226,7 +136,7 @@ export function removeColumnError(
   };
 }
 
-export function removeColumnStartError(
+function removeColumnStart(
   number: number,
   message: GIFTSyntaxError
 ): GIFTSyntaxError {
