@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ## 0.2.2 (18-08-20)
+
 - Resolve issue with ambient declarations
 
 ## 0.2.1 (18-08-20)
