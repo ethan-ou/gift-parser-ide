@@ -3,9 +3,11 @@
 ## [Unreleased]
 
 ## 0.2.1 (18-08-20)
+
 - Add Typescript typings
 
 ## 0.2.0 (18-08-20)
+
 - Major internal refactoring & API change
 - Remove newline string libraries
 
