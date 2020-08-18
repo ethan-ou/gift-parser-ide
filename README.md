@@ -22,16 +22,14 @@ There are two parsers available:
 **ES6+**
 
 ```javascript
-import Parser from "gift-parser-ide"; // Default: Class-based Incremental Parser
-
+import GIFTParser from "gift-parser-ide"; // Default: Class-based Incremental Parser
 import { parser } from "gift-parser-ide"; // Function-based One-Shot Parser
 ```
 
 **Node/CommonJS**
 
 ```javascript
-var Parser = require("gift-parser-ide").default; // Default:  Class-based Incremental Parser
-
+var Parser = require("gift-parser-ide").default; // Default: Class-based Incremental Parser
 var parser = require("gift-parser-ide").parser; // Function-based One-Shot Parser
 ```
 
@@ -41,24 +39,38 @@ var parser = require("gift-parser-ide").parser; // Function-based One-Shot Parse
 var text = "::Title:: Gift Question {}";
 
 // Class
-var GIFTParser = new Parser();
-var output = GIFTParser.update(text); // Returns SyntaxError[]
+var Parser = new GIFTParser();
+Parser.update(text) //Updates the parser with new text
+var output = Parser.result(); // Returns GIFTResult[]
 
 // Function
-var output = parser(text); // Returns SyntaxError[]
+var output = parser.parse(text); // Returns GIFTResult[]
 ```
 
 ## API
+### `GIFTParser.update(text: string)`
+- Updates the GIFTParser with new text. To return a value, use `.result()` to get a full result or `.parseOnly()` and `.errorOnly()` to get only the parsed output or error output respectively.
 
-### `Parser()`
+### `GIFTParser.result()`
+- Returns a `GIFTResult[]` which includes both parsed sections of GIFT and sections with errors.
 
-Class-based parser.
+### `GIFTParser.parseOnly()`
+- Returns the parsed output of a GIFT text. Does not throw an error if a section cannot be parsed.
 
-- `Parser.update(text: string)`: Update the parser with new text. Returns: `SyntaxError[]`
+### `GIFTParser.errorOnly()`
+- Returns all errors found within a GIFT text.
 
-### `parser(text: string)`
+### `parser.parse(text: string)`
+- Parses a GIFT text and returns both parsed sections of GIFT and sections with errors. Functionally equivalent to `GIFTParser.update(text).result()` without keeping previous parses.
 
-Function-based parser.
+### `parser.parseOnly(text: string)`
+- Returns the parsed output of a GIFT text. Does not throw an error if a section cannot be parsed. Functionally equivalent to `GIFTParser.update(text).parseOnly()` without keeping previous parses.
+
+### `parser.errorOnly(text: string)`
+- Returns all errors found within a GIFT text. Functionally equivalent to `GIFTParser.update(text).errorOnly()` without keeping previous parses.
+
+### `parser.parseRaw(text: string)`
+- Wraps the raw GIFT parser. Mainly used as a utility class.
 
 ## License
 
