@@ -25,9 +25,7 @@
   },
   "homepage": "https://github.com/ethan-ou/gift-parser-ide#readme",
   "dependencies": {
-    "deep-diff": "^1.0.2",
-    "detect-newline": "^3.1.0",
-    "eol": "^0.9.1"
+    "deep-diff": "^1.0.2"
   },
   "devDependencies": {
     "@types/deep-diff": "^1.0.0",

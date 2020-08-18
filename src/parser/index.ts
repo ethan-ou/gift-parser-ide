@@ -1,10 +1,9 @@
-import eol from "eol";
-import detectNewLine from "detect-newline";
 import { diff } from "deep-diff";
 import textSplit from "./textSplit";
 import cleanText from "./cleanText";
 import PEGWrapper from "./PEGWrapper";
 import handleErrors, { handleSingleError } from "./handleErrors";
+import { convertLineType, detectLineType } from "./newLine";
 import {
   TextSplit,
   ParseResult,
@@ -18,16 +17,12 @@ import {
 export default function parse(text: string) {
   const textSplit = createTextSplit(text);
   const parseResult = parseTextSplit(textSplit);
-  const allErrors = findAllErrors(
-    parseResult,
-    text,
-    detectNewLine.graceful(text)
-  );
+  const allErrors = findAllErrors(parseResult, text, detectLineType(text));
   return allErrors;
 }
 
 export const createTextSplit = (text: string) =>
-  textSplit(cleanText(eol.lf(text)));
+  textSplit(cleanText(convertLineType(text, "LF")));
 
 export const parseTextSplit = (split: TextSplit[]) =>
   split.map((split) => {
@@ -54,7 +49,7 @@ export const diffTextSplitToParse = (
     handleSingleError(
       parseSingleTextSplit(split),
       originalText,
-      detectNewLine.graceful(originalText)
+      detectLineType(originalText)
     );
   const diffArray = diff(oldSplit, split);
 
