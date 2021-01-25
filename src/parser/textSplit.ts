@@ -75,12 +75,11 @@ export function findSafeLineBreaks(text: string): number[] {
 
   while (iter.i < text.length) {
     let char = text[iter.i];
-    let nextChar = text[iter.i + 1];
+    let prevChar = text[iter.i - 1];
 
     if (char === NEWLINE) {
       const emptyLineFound =
         text.slice(iter.prevBreak + 1, iter.i).match(EMPTYORSPACES) !== null;
-
       // Backtrack to previous break and check if text
       // contains only spaces, and not in scope.
       if (emptyLineFound && iter.scope === false) {
@@ -96,18 +95,11 @@ export function findSafeLineBreaks(text: string): number[] {
     }
 
     // Skip any backslashed tokens as per GIFT spec
-    if (
-      char === ESCAPE &&
-      (nextChar === TOKEN.START || nextChar === TOKEN.END)
-    ) {
-      iter.i += 2;
-    }
-
-    if (char === TOKEN.START) {
+    if (char === TOKEN.START && prevChar !== ESCAPE) {
       iter.scope = true;
     }
 
-    if (char === TOKEN.END) {
+    if (char === TOKEN.END && prevChar !== ESCAPE) {
       iter.scope = false;
     }
 
