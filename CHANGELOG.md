@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## 0.2.3 (25-01-20)
+
+- Resolve escaped brackets at end of line causing early split
+
 ## 0.2.2 (18-08-20)
 
 - Resolve issue with ambient declarations
