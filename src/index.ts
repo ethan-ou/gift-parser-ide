@@ -1,3 +1,4 @@
+import { GIFTQuestion } from "gift-pegjs";
 import parse, {
   createTextSplit,
   diffTextSplitToParse,
@@ -52,12 +53,12 @@ export default class GIFTParser {
     return this._parse;
   }
 
-  public parseOnly() {
-    return reduceParseType(this._parse, "result");
+  public parseOnly(): GIFTQuestion[] {
+    return reduceParseType(this._parse, "result") as GIFTQuestion[];
   }
 
   public errorOnly(): GIFTSyntaxError[] {
-    return reduceParseType(this._parse, "error");
+    return reduceParseType(this._parse, "error") as GIFTSyntaxError[];
   }
 }
 
@@ -71,7 +72,7 @@ export default class GIFTParser {
 
 export const parser = {
   parse: (text: string) => parse(text),
-  parseOnly: (text: string) => reduceParseType(parse(text), "result"),
-  errorOnly: (text: string) => reduceParseType(parse(text), "error"),
+  parseOnly: (text: string) => reduceParseType(parse(text), "result") as GIFTQuestion[],
+  errorOnly: (text: string) => reduceParseType(parse(text), "error") as GIFTSyntaxError[],
   parseRaw: (text: string) => parserWrapper(text),
 };

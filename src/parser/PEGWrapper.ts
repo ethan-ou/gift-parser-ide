@@ -1,4 +1,4 @@
-import { parse, SyntaxError } from "./PEGParser";
+import { parse } from "gift-pegjs";
 import { ParseReturn, ErrorReturn } from "../types";
 
 /**

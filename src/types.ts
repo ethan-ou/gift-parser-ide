@@ -1,4 +1,4 @@
-import { Expectation, IFileRange, SyntaxError } from "./parser/PEGParser";
+import { SyntaxError, GIFTQuestion } from "gift-pegjs";
 
 export interface GIFTSyntaxError extends SyntaxError {}
 
@@ -6,7 +6,7 @@ export type ParseType = "result" | "error";
 
 export interface ParseReturn {
   type: Extract<"result", ParseType>;
-  result: any;
+  result: GIFTQuestion[];
 }
 
 export interface ErrorReturn {

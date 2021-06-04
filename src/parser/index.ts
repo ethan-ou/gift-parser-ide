@@ -1,4 +1,5 @@
 import { diff } from "deep-diff";
+import { GIFTQuestion } from "gift-pegjs";
 import textSplit from "./textSplit";
 import cleanText from "./cleanText";
 import PEGWrapper from "./PEGWrapper";
@@ -114,14 +115,14 @@ export const parserWrapper = (text: string) => PEGWrapper(text);
 export const reduceParseType = (
   parse: GIFTResult[],
   type: ParseType
-): GIFTSyntaxError[] | any => {
+): GIFTSyntaxError[] | any[] => {
   const out = [];
   for (const item of parse) {
     if (item.type === type) {
       for (const result of item.result) {
         out.push(result);
       }
-    }
+    } else {}
   }
 
   return out;
