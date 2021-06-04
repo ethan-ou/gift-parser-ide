@@ -4,8 +4,7 @@ import { parser } from ".";
 import {ErrorResult, ErrorResultArr, ErrorReturn, ErrorReturnArr, ParseResult} from "./types";
 
 expectType<GIFTQuestion[]>(parser.parseOnly('Text'));
-expectType<(ParseResult | ErrorResultArr)[]>
-
+expectType<ParseResult>(parser.parseOnly('Text'))
 
 const questions = parser.parseOnly("Text");
 
