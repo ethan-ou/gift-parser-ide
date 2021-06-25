@@ -1,62 +1,66 @@
 {
   "result": [
-    {
-      "message": "Expected \"{\" but \"=\" found.",
-      "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
-      "found": "=",
-      "location": {
-        "start": { "offset": 92, "line": 3, "column": 11 },
-        "end": { "offset": 93, "line": 3, "column": 12 }
+    null,
+    [
+      {
+        "message": "Expected \"{\" but \"=\" found.",
+        "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+        "found": "=",
+        "location": {
+          "start": { "offset": 92, "line": 3, "column": 11 },
+          "end": { "offset": 93, "line": 3, "column": 12 }
+        },
+        "name": "SyntaxError"
       },
-      "name": "SyntaxError"
-    },
-    {
-      "message": "Expected \"{\" but \"~\" found.",
-      "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
-      "found": "~",
-      "location": {
-        "start": { "offset": 102, "line": 3, "column": 21 },
-        "end": { "offset": 103, "line": 3, "column": 22 }
+      {
+        "message": "Expected \"{\" but \"~\" found.",
+        "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+        "found": "~",
+        "location": {
+          "start": { "offset": 102, "line": 3, "column": 21 },
+          "end": { "offset": 103, "line": 3, "column": 22 }
+        },
+        "name": "SyntaxError"
       },
-      "name": "SyntaxError"
-    },
-    {
-      "message": "Expected \"{\" but \"#\" found.",
-      "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
-      "found": "#",
-      "location": {
-        "start": { "offset": 105, "line": 3, "column": 24 },
-        "end": { "offset": 106, "line": 3, "column": 25 }
+      {
+        "message": "Expected \"{\" but \"#\" found.",
+        "expected": [{ "type": "literal", "text": "{", "ignoreCase": false }],
+        "found": "#",
+        "location": {
+          "start": { "offset": 105, "line": 3, "column": 24 },
+          "end": { "offset": 106, "line": 3, "column": 25 }
+        },
+        "name": "SyntaxError"
       },
-      "name": "SyntaxError"
-    },
-    {
-      "message": "Expected (blank line separator) but \"{\" found.",
-      "expected": [
-        { "type": "other", "description": "(blank line separator)" }
-      ],
-      "found": "{",
-      "location": {
-        "start": { "offset": 125, "line": 3, "column": 44 },
-        "end": { "offset": 126, "line": 3, "column": 45 }
+      {
+        "message": "Expected (blank lines separator) but \"{\" found.",
+        "expected": [
+          { "type": "other", "description": "(blank lines separator)" }
+        ],
+        "found": "{",
+        "location": {
+          "start": { "offset": 125, "line": 3, "column": 44 },
+          "end": { "offset": 126, "line": 3, "column": 45 }
+        },
+        "name": "SyntaxError"
       },
-      "name": "SyntaxError"
-    },
-    {
-      "message": "Expected (blank line separator) but \"}\" found.",
-      "expected": [
-        { "type": "other", "description": "(blank line separator)" }
-      ],
-      "found": "}",
-      "location": {
-        "start": { "offset": 130, "line": 3, "column": 49 },
-        "end": { "offset": 131, "line": 3, "column": 50 }
-      },
-      "name": "SyntaxError"
-    }
+      {
+        "message": "Expected (blank lines separator) but \"}\" found.",
+        "expected": [
+          { "type": "other", "description": "(blank lines separator)" }
+        ],
+        "found": "}",
+        "location": {
+          "start": { "offset": 130, "line": 3, "column": 49 },
+          "end": { "offset": 131, "line": 3, "column": 50 }
+        },
+        "name": "SyntaxError"
+      }
+    ]
   ],
-  "start": 1,
-  "end": 4,
-  "text": "::GIFT range of non-escaped symbols::\nHere's a question that has symbols inside, \nsuch as `-=\\[\\];',./~!@#$%^&*()_+{}|\\:\"<>? {True}",
-  "type": "error"
+  "location": {
+    "start": 1,
+    "end": 4,
+    "text": "::GIFT range of non-escaped symbols::\nHere's a question that has symbols inside, \nsuch as `-=\\[\\];',./~!@#$%^&*()_+{}|\\:\"<>? {True}"
+  }
 }

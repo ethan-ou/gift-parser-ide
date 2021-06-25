@@ -1,12 +1,16 @@
-import { GIFTQuestion } from "gift-pegjs";
+import { GIFTQuestion, parse as GIFTPEGParse } from "gift-pegjs";
 import parse, {
-  createTextSplit,
-  diffTextSplitToParse,
-  parserWrapper,
-  reduceParseType,
+  createTextSections,
+  diffTextSection,
+  filterParseType,
 } from "./parser";
 
-import { TextSplit, GIFTSyntaxError, GIFTResult } from "./types";
+import {
+  GIFTTextSection,
+  GIFTSyntaxError,
+  GIFTParse,
+  GIFTParseSection,
+} from "./types";
 
 /**
  * Incremental error parser for Moodle's GIFT format. Create a parser
@@ -14,8 +18,8 @@ import { TextSplit, GIFTSyntaxError, GIFTResult } from "./types";
  * @class Parser
  */
 export default class GIFTParser {
-  private _split: TextSplit[];
-  private _parse: GIFTResult[];
+  private _split: GIFTTextSection[];
+  private _parse: GIFTParseSection[];
 
   /**
    * Create a new Parser object.
@@ -37,28 +41,23 @@ export default class GIFTParser {
    * @param text Input text
    */
   public update(text: string) {
-    const newSplit = createTextSplit(text);
-    this._parse = diffTextSplitToParse(
-      newSplit,
-      this._split,
-      this._parse,
-      text
-    );
+    const newSplit = createTextSections(text);
+    this._parse = diffTextSection(newSplit, this._split, this._parse, text);
     this._split = newSplit;
 
     return this;
   }
 
-  public result(): GIFTResult[] {
+  public result(): GIFTParseSection[] {
     return this._parse;
   }
 
   public parseOnly(): GIFTQuestion[] {
-    return reduceParseType(this._parse, "result") as GIFTQuestion[];
+    return filterParseType(this._parse, "success") as GIFTQuestion[];
   }
 
   public errorOnly(): GIFTSyntaxError[] {
-    return reduceParseType(this._parse, "error") as GIFTSyntaxError[];
+    return filterParseType(this._parse, "error") as GIFTSyntaxError[];
   }
 }
 
@@ -71,8 +70,10 @@ export default class GIFTParser {
  */
 
 export const parser = {
-  parse: (text: string) => parse(text),
-  parseOnly: (text: string) => reduceParseType(parse(text), "result") as GIFTQuestion[],
-  errorOnly: (text: string) => reduceParseType(parse(text), "error") as GIFTSyntaxError[],
-  parseRaw: (text: string) => parserWrapper(text),
+  parse: (text: string): GIFTParseSection[] => parse(text),
+  parseOnly: (text: string): GIFTQuestion[] =>
+    filterParseType(parse(text), "success") as GIFTQuestion[],
+  errorOnly: (text: string): GIFTSyntaxError[] =>
+    filterParseType(parse(text), "error") as GIFTSyntaxError[],
+  parseRaw: (text: string): GIFTQuestion[] => GIFTPEGParse(text),
 };

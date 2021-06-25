@@ -1,0 +1,67 @@
+[
+  [
+    {
+      "type": "MC",
+      "title": null,
+      "stem": { "format": "moodle", "text": "Question" },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "choices": [
+        {
+          "isCorrect": true,
+          "weight": null,
+          "text": { "format": "moodle", "text": "Correct Answer" },
+          "feedback": null
+        },
+        {
+          "isCorrect": false,
+          "weight": null,
+          "text": { "format": "moodle", "text": "Incorrect Answer 1" },
+          "feedback": null
+        },
+        {
+          "isCorrect": false,
+          "weight": null,
+          "text": { "format": "moodle", "text": "Incorrect Answer 2" },
+          "feedback": null
+        },
+        {
+          "isCorrect": false,
+          "weight": null,
+          "text": { "format": "moodle", "text": "Incorrect Answer 3" },
+          "feedback": null
+        }
+      ],
+      "id": null,
+      "tags": null
+    },
+    {
+      "type": "Matching",
+      "title": null,
+      "stem": { "format": "moodle", "text": "Question" },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "matchPairs": [
+        {
+          "subquestion": { "format": "moodle", "text": "Item 1" },
+          "subanswer": "Match 1"
+        },
+        {
+          "subquestion": { "format": "moodle", "text": "Item 2" },
+          "subanswer": "Match 2"
+        },
+        {
+          "subquestion": { "format": "moodle", "text": "Item 3" },
+          "subanswer": "Match 3"
+        },
+        {
+          "subquestion": { "format": "moodle", "text": "Item 4" },
+          "subanswer": "Match 4"
+        }
+      ],
+      "id": null,
+      "tags": null
+    }
+  ],
+  null
+]

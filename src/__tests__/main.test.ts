@@ -49,8 +49,7 @@ describe("Exports Parser: Error Mocks", () => {
     const text = fs.readFileSync(filePath, "utf-8");
 
     // Write new tests to directory.
-    // const GIFT = new Parser();
-    // fs.writeFileSync(expectedPath, JSON.stringify(GIFT.update(text)));
+    // fs.writeFileSync(expectedPath, JSON.stringify(parser.errorOnly(text)));
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
@@ -85,7 +84,7 @@ describe("Exports Parser: Incremental Parsing Mocks", () => {
     const text = fs.readFileSync(filePath, "utf-8");
 
     // Write new tests to directory.
-    // fs.writeFileSync(expectedPath, JSON.stringify(parser(text)));
+    // fs.writeFileSync(expectedPath, JSON.stringify(parser.errorOnly(text)));
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
     it(`Class Incremental Parsing: ${file}`, () => {

@@ -1,38 +1,42 @@
 {
   "result": [
-    {
-      "message": "Expected \"}\" but \"~\" found.",
-      "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
-      "found": "~",
-      "location": {
-        "start": { "offset": 34, "line": 3, "column": 5 },
-        "end": { "offset": 35, "line": 3, "column": 6 }
+    null,
+    [
+      {
+        "message": "Expected \"}\" but \"~\" found.",
+        "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+        "found": "~",
+        "location": {
+          "start": { "offset": 34, "line": 3, "column": 5 },
+          "end": { "offset": 35, "line": 3, "column": 6 }
+        },
+        "name": "SyntaxError"
       },
-      "name": "SyntaxError"
-    },
-    {
-      "message": "Expected \"}\" but \"~\" found.",
-      "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
-      "found": "~",
-      "location": {
-        "start": { "offset": 58, "line": 4, "column": 5 },
-        "end": { "offset": 59, "line": 4, "column": 6 }
+      {
+        "message": "Expected \"}\" but \"~\" found.",
+        "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+        "found": "~",
+        "location": {
+          "start": { "offset": 58, "line": 4, "column": 5 },
+          "end": { "offset": 59, "line": 4, "column": 6 }
+        },
+        "name": "SyntaxError"
       },
-      "name": "SyntaxError"
-    },
-    {
-      "message": "Expected \"}\" but \"~\" found.",
-      "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
-      "found": "~",
-      "location": {
-        "start": { "offset": 82, "line": 5, "column": 5 },
-        "end": { "offset": 83, "line": 5, "column": 6 }
-      },
-      "name": "SyntaxError"
-    }
+      {
+        "message": "Expected \"}\" but \"~\" found.",
+        "expected": [{ "type": "literal", "text": "}", "ignoreCase": false }],
+        "found": "~",
+        "location": {
+          "start": { "offset": 82, "line": 5, "column": 5 },
+          "end": { "offset": 83, "line": 5, "column": 6 }
+        },
+        "name": "SyntaxError"
+      }
+    ]
   ],
-  "start": 1,
-  "end": 6,
-  "text": "Question {\n    Correct Answer\n    ~Incorrect Answer 1\n    ~Incorrect Answer 2\n    ~Incorrect Answer 3\n}",
-  "type": "error"
+  "location": {
+    "start": 1,
+    "end": 6,
+    "text": "Question {\n    Correct Answer\n    ~Incorrect Answer 1\n    ~Incorrect Answer 2\n    ~Incorrect Answer 3\n}"
+  }
 }

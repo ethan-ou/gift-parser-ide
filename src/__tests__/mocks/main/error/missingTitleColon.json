@@ -1,9 +1,10 @@
 [
   {
-    "message": "Expected \"{\", :: Title ::, Category, Description, or Question stem but \":\" found.",
+    "message": "Expected \"{\", (comment), :: Title ::, Category, Description, or Question stem but \":\" found.",
     "expected": [
       { "type": "other", "description": "Category" },
       { "type": "other", "description": "Description" },
+      { "type": "other", "description": "(comment)" },
       { "type": "other", "description": ":: Title ::" },
       { "type": "other", "description": "Question stem" },
       { "type": "literal", "text": "{", "ignoreCase": false }

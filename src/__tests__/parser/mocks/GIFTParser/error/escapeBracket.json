@@ -1,0 +1,45 @@
+[
+  [
+    {
+      "type": "MC",
+      "title": null,
+      "stem": { "format": "moodle", "text": "b+ is equivalent to" },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "choices": [
+        {
+          "isCorrect": false,
+          "weight": null,
+          "text": { "format": "moodle", "text": "b{2,}" },
+          "feedback": null
+        },
+        {
+          "isCorrect": true,
+          "weight": null,
+          "text": { "format": "moodle", "text": "bb*" },
+          "feedback": null
+        }
+      ],
+      "id": null,
+      "tags": null
+    },
+    {
+      "type": "Short",
+      "title": null,
+      "stem": { "format": "moodle", "text": "a new question" },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "choices": [
+        {
+          "isCorrect": true,
+          "weight": null,
+          "text": { "format": "moodle", "text": "new question" },
+          "feedback": null
+        }
+      ],
+      "id": null,
+      "tags": null
+    }
+  ],
+  null
+]

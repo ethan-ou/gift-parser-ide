@@ -30,8 +30,8 @@
     "name": "SyntaxError"
   },
   {
-    "message": "Expected (blank line separator) but \"{\" found.",
-    "expected": [{ "type": "other", "description": "(blank line separator)" }],
+    "message": "Expected (blank lines separator) but \"{\" found.",
+    "expected": [{ "type": "other", "description": "(blank lines separator)" }],
     "found": "{",
     "location": {
       "start": { "offset": 125, "line": 3, "column": 44 },
@@ -40,8 +40,8 @@
     "name": "SyntaxError"
   },
   {
-    "message": "Expected (blank line separator) but \"}\" found.",
-    "expected": [{ "type": "other", "description": "(blank line separator)" }],
+    "message": "Expected (blank lines separator) but \"}\" found.",
+    "expected": [{ "type": "other", "description": "(blank lines separator)" }],
     "found": "}",
     "location": {
       "start": { "offset": 130, "line": 3, "column": 49 },

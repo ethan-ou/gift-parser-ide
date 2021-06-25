@@ -1,44 +1,48 @@
 [
-  {
-    "type": "Short",
-    "title": null,
-    "stem": {
-      "format": "moodle",
-      "text": "_____ is the largest continent."
-    },
-    "hasEmbeddedAnswers": false,
-    "globalFeedback": null,
-    "choices": [
-      {
-        "isCorrect": true,
-        "weight": 100,
-        "text": {
+    {
+      "id" : null,
+      "tags" : null,
+     "type": "Short",
+       "title": null,
+       "stem": {
           "format": "moodle",
-          "text": "Asia"
-        },
-        "feedback": null
-      }
-    ]
-  },
-  {
-    "type": "Short",
-    "title": "Continents",
-    "stem": {
-      "format": "moodle",
-      "text": "_____ is the largest continent."
+          "text": "_____ is the largest continent."
+       },
+       "hasEmbeddedAnswers": false,
+       "globalFeedback": null,
+       "choices": [
+          {
+             "isCorrect": true,
+             "weight": 100,
+             "text": {
+                "format": "moodle",
+                "text": "Asia"
+             },
+             "feedback": null
+          }
+       ]
     },
-    "hasEmbeddedAnswers": false,
-    "globalFeedback": null,
-    "choices": [
-      {
-        "isCorrect": true,
-        "weight": 100,
-        "text": {
+    {
+      "id" : null,
+      "tags" : null,
+     "type": "Short",
+       "title": "Continents",
+       "stem": {
           "format": "moodle",
-          "text": "Asia"
-        },
-        "feedback": null
-      }
-    ]
-  }
-]
+          "text": "_____ is the largest continent."
+       },
+       "hasEmbeddedAnswers": false,
+       "globalFeedback": null,
+       "choices": [
+          {
+             "isCorrect": true,
+             "weight": 100,
+             "text": {
+                "format": "moodle",
+                "text": "Asia"
+             },
+             "feedback": null
+          }
+       ]
+    }
+ ]

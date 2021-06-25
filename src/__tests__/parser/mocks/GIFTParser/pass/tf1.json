@@ -1,0 +1,20 @@
+[
+  [
+    {
+      "type": "TF",
+      "title": null,
+      "stem": {
+        "format": "moodle",
+        "text": "Grant is buried in Grant's tomb."
+      },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "isTrue": false,
+      "incorrectFeedback": null,
+      "correctFeedback": null,
+      "id": null,
+      "tags": null
+    }
+  ],
+  null
+]

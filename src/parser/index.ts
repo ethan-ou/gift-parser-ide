@@ -1,58 +1,62 @@
 import { diff } from "deep-diff";
-import { GIFTQuestion } from "gift-pegjs";
-import textSplit from "./textSplit";
+import findTextSections from "./textSection";
 import cleanText from "./cleanText";
-import PEGWrapper from "./PEGWrapper";
+import GIFTParser from "./GIFTParser";
 import handleErrors, { handleSingleError } from "./handleErrors";
 import { convertLineType, detectLineType } from "./newLine";
 import {
-  TextSplit,
-  ParseResult,
-  ErrorResult,
-  ErrorResultArr,
-  GIFTResult,
+  GIFTParse,
+  GIFTParseSection,
+  GIFTTextSection,
   GIFTSyntaxError,
-  ParseType,
 } from "../types";
+import { GIFTQuestion } from "gift-pegjs";
 
+// TODO: Change to preprocessing function over going directly for errors
 export default function parse(text: string) {
-  const textSplit = createTextSplit(text);
-  const parseResult = parseTextSplit(textSplit);
+  const textSection = createTextSections(text);
+  const parseResult = textSection.map((section) => parseTextSection(section));
   const allErrors = findAllErrors(parseResult, text, detectLineType(text));
   return allErrors;
 }
 
-export const createTextSplit = (text: string) =>
-  textSplit(cleanText(convertLineType(text, "LF")));
+// TODO: Add comments back into parsing
+export const createTextSections = (text: string): GIFTTextSection[] =>
+  findTextSections(cleanText(convertLineType(text, "LF")));
 
-export const parseTextSplit = (split: TextSplit[]) =>
-  split.map((split) => {
-    return parseSingleTextSplit(split);
-  });
-
-const parseSingleTextSplit = (split: TextSplit) => {
-  return { ...PEGWrapper(split.text), ...split };
+export const parseTextSection = (
+  section: GIFTTextSection
+): GIFTParseSection => {
+  return {
+    location: section,
+    result: GIFTParser(section.text),
+  };
 };
 
+export const findAllErrors = (
+  parse: GIFTParseSection[],
+  originalText: string,
+  lineEnding: string
+) => handleErrors(parse, originalText, lineEnding);
+
 /**
- * Diffs the old TextSplit[] with a
- * new TextSplit[] to look for changes
+ * Diffs the old GIFTTextSection[] with a
+ * new GIFTTextSection[] to look for changes
  * within a text document.
- * @param newSplit An array of TextSplit objects.
  */
-export const diffTextSplitToParse = (
-  split: TextSplit[],
-  oldSplit: TextSplit[],
-  changeArray: GIFTResult[],
+export const diffTextSection = (
+  section: GIFTTextSection[],
+  oldSection: GIFTTextSection[],
+  changeArray: GIFTParseSection[],
   originalText: string
-): GIFTResult[] => {
-  const onChange = (split: TextSplit) =>
+): GIFTParseSection[] => {
+  const onChange = (section: GIFTTextSection): GIFTParseSection =>
     handleSingleError(
-      parseSingleTextSplit(split),
+      parseTextSection(section),
       originalText,
       detectLineType(originalText)
     );
-  const diffArray = diff(oldSplit, split);
+  const diffArray = diff(oldSection, section);
 
   if (!diffArray) {
     return changeArray;
@@ -62,18 +66,18 @@ export const diffTextSplitToParse = (
     switch (diff.kind) {
       // If the change was an Edit
       case "E": {
-        let diffIndex = diff?.path && diff.path[0];
-        let diffKey = diff?.path && diff.path[1];
+        let diffIndex: number = diff?.path && diff.path[0];
+        let diffKey: string = diff?.path && diff.path[1];
 
         switch (diffKey) {
           case "text":
-            changeArray[diffIndex] = onChange(split[diffIndex]);
+            changeArray[diffIndex] = onChange(section[diffIndex]);
             break;
           case "start":
-            changeArray[diffIndex].start = split[diffIndex].start;
+            changeArray[diffIndex].location.start = section[diffIndex].start;
             break;
           case "end":
-            changeArray[diffIndex].end = split[diffIndex].end;
+            changeArray[diffIndex].location.end = section[diffIndex].end;
             break;
         }
         break;
@@ -83,7 +87,7 @@ export const diffTextSplitToParse = (
         switch (diff.item.kind) {
           // New Item
           case "N":
-            changeArray[diff.index] = onChange(split[diff.index]);
+            changeArray[diff.index] = onChange(section[diff.index]);
             break;
           // Delete item
           case "D":
@@ -98,32 +102,37 @@ export const diffTextSplitToParse = (
   return changeArray;
 };
 
-export const findAllErrors = (
-  parse: (ParseResult | ErrorResult | ErrorResultArr)[],
-  originalText: string,
-  lineEnding: string
-) => handleErrors(parse, originalText, lineEnding);
-
-export const parserWrapper = (text: string) => PEGWrapper(text);
-
 /**
  * Reduces nested error objects into a single array for
  * simple IDE access.
  * @param array Parsed input.
  * @returns An array of syntax errors.
  */
-export const reduceParseType = (
-  parse: GIFTResult[],
-  type: ParseType
-): GIFTSyntaxError[] | any[] => {
-  const out = [];
-  for (const item of parse) {
-    if (item.type === type) {
-      for (const result of item.result) {
-        out.push(result);
-      }
-    } else {}
-  }
+export const filterParseType = (
+  sections: GIFTParseSection[],
+  type: "success" | "error"
+): GIFTQuestion[] | GIFTSyntaxError[] => {
+  switch (type) {
+    case "success":
+      const successArray: GIFTQuestion[] = [];
+      for (const section of sections) {
+        const [success, error] = section.result;
 
-  return out;
+        if (success !== null) {
+          successArray.push(...success);
+        }
+      }
+      return successArray;
+
+    case "error":
+      const errorArray: GIFTSyntaxError[] = [];
+      for (const section of sections) {
+        const [success, error] = section.result;
+
+        if (error !== null) {
+          errorArray.push(...error);
+        }
+      }
+      return errorArray;
+  }
 };

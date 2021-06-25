@@ -1,0 +1,17 @@
+[
+  [
+    {
+      "type": "Essay",
+      "title": null,
+      "stem": {
+        "format": "moodle",
+        "text": "Write a short biography of Dag Hammarskjöld."
+      },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "id": null,
+      "tags": null
+    }
+  ],
+  null
+]

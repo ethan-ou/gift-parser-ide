@@ -1,0 +1,14 @@
+[
+  [
+    {
+      "type": "Essay",
+      "title": null,
+      "stem": { "format": "moodle", "text": "Essay?" },
+      "hasEmbeddedAnswers": false,
+      "globalFeedback": null,
+      "id": "123",
+      "tags": null
+    }
+  ],
+  null
+]

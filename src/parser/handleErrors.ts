@@ -1,11 +1,5 @@
-import PEGWrapper from "./PEGWrapper";
-import {
-  ParseResult,
-  ErrorResultArr,
-  ErrorResult,
-  GIFTSyntaxError,
-  GIFTResult,
-} from "../types";
+import GIFTParser from "./GIFTParser";
+import { GIFTParse, GIFTParseSection, GIFTSyntaxError } from "../types";
 
 /**
  * Recursively finds errors in a section of the input
@@ -15,7 +9,7 @@ import {
  * @param message
  */
 export default function handleErrors(
-  parseArray: (ParseResult | ErrorResult | ErrorResultArr)[],
+  parseArray: GIFTParseSection[],
   originalText: string,
   lineEnding: string
 ) {
@@ -23,33 +17,52 @@ export default function handleErrors(
   const out = [];
 
   for (const item of parseArray) {
-    if (item.text.match(EMPTYORSPACES)) {
-      continue;
+    const { location } = item;
+    if (!location.text.match(EMPTYORSPACES)) {
+      out.push(handleSingleError(item, originalText, lineEnding));
     }
-
-    out.push(handleSingleError(item, originalText, lineEnding));
   }
 
   return out;
 }
 
 export function handleSingleError(
-  parse: ParseResult | ErrorResult | ErrorResultArr,
+  parse: GIFTParseSection,
   originalText: string,
   lineEnding: string
-): GIFTResult {
-  return (parse.type === "error" && !Array.isArray(parse.result)
-    ? correctMessage(findErrors(parse as ErrorResult), originalText, lineEnding)
-    : parse) as GIFTResult;
+): GIFTParseSection {
+  const [success, error] = parse.result;
+
+  if (error === null) {
+    return parse;
+  }
+
+  // GIFT Parser only returns a single error if the section of text
+  // hasn't been processed yet. Since all errors are wrapped in an
+  // array, checking for a single error is a good heuristic to
+  // see whether more errors need to be found.
+  const checkSingleErrorFound = error !== null && error.length === 1;
+
+  return checkSingleErrorFound
+    ? correctMessage(findErrors(parse), originalText, lineEnding)
+    : parse;
 }
 
-function findErrors(message: ErrorResult): ErrorResultArr {
+// TODO: Change language used
+function findErrors(message: GIFTParseSection): GIFTParseSection {
   const ITERATION_LIMIT = 50;
   const stack: string[] = [];
   const errors: GIFTSyntaxError[] = [];
 
-  stack.push(message.text);
-  errors.push(message.result);
+  const { location, result } = message;
+  const [success, error] = result;
+
+  if (error === null) {
+    return message;
+  }
+
+  stack.push(location.text);
+  errors.push(...error);
 
   try {
     let i = 0;
@@ -61,10 +74,10 @@ function findErrors(message: ErrorResult): ErrorResultArr {
       );
       stack.push(findToken);
 
-      const newError = PEGWrapper(findToken);
+      const [newSuccess, newError] = GIFTParser(findToken);
 
-      if (newError.type === "error") {
-        errors.push(newError.result);
+      if (newError !== null) {
+        errors.push(...newError);
         i++;
       } else {
         break;
@@ -74,7 +87,7 @@ function findErrors(message: ErrorResult): ErrorResultArr {
 
   return {
     ...message,
-    result: errors,
+    result: [null, errors],
   };
 }
 
@@ -174,60 +187,78 @@ function escapeToken(text: string, location: number): string {
  */
 
 export function correctMessage(
-  message: ErrorResultArr,
+  message: GIFTParseSection,
   originalText: string,
   lineEnding: string
-): ErrorResultArr {
+): GIFTParseSection {
   return correctError(originalText, correctToken(message), lineEnding);
 }
 
 function correctError(
   text: string,
-  message: ErrorResultArr,
+  message: GIFTParseSection,
   lineEnding: string
-): ErrorResultArr {
+): GIFTParseSection {
+  const location = message.location;
+
   const NEWLINE = "\n";
   const charPerLine = text
     .split(NEWLINE)
     .map((line) => line.length + lineEnding.length);
-  const offsetIndex = charPerLine[message.start - 2]
-    ? charPerLine[message.start - 2]
+  const offsetIndex = charPerLine[location.start - 2]
+    ? charPerLine[location.start - 2]
     : 0;
+
+  const [success, error] = message.result;
+
+  if (success !== null || error === null) {
+    return message;
+  }
+
+  const newError = error.map((item) =>
+    addError(
+      {
+        offset: offsetIndex,
+        line: location.start - 1,
+        column: 0,
+      },
+      item
+    )
+  );
 
   return {
     ...message,
-    result: message.result.map((item) =>
-      addError(
-        {
-          offset: offsetIndex,
-          line: message.start - 1,
-          column: 0,
-        },
-        item
-      )
-    ),
+    result: [null, newError],
   };
 }
 
-function correctToken(message: ErrorResultArr): ErrorResultArr {
+function correctToken(message: GIFTParseSection): GIFTParseSection {
   const iter = {
     prevLine: -1,
     count: 0,
   };
 
+  const [success, error] = message.result;
+
+  if (success !== null || error === null) {
+    return message;
+  }
+
+  const newError = error.map((item, idx) => {
+    const { start, end } = item.location;
+
+    iter.prevLine === start.line
+      ? iter.count++
+      : ((iter.count = 0), (iter.prevLine = start?.line));
+
+    return end.line > start.line
+      ? removeOffset(idx, removeColumnStart(iter.count, item))
+      : removeOffset(idx, removeColumn(iter.count, item));
+  });
+
   return {
     ...message,
-    result: message.result.map((item, idx) => {
-      const { start, end } = item.location;
-
-      iter.prevLine === start.line
-        ? iter.count++
-        : ((iter.count = 0), (iter.prevLine = start?.line));
-
-      return end.line > start.line
-        ? removeOffset(idx, removeColumnStart(iter.count, item))
-        : removeOffset(idx, removeColumn(iter.count, item));
-    }),
+    result: [null, newError],
   };
 }
 
