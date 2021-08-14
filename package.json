@@ -1,6 +1,6 @@
 {
   "name": "gift-parser-ide",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A parser for Moodle's GIFT format designed for error checking in IDE's.",
   "main": "out/index.js",
   "types": "out/index.d.ts",
@@ -30,20 +30,20 @@
     "gift-pegjs": "^0.2.0"
   },
   "devDependencies": {
-    "@types/deep-diff": "^1.0.0",
-    "@types/jest": "^26.0.23",
+    "@types/deep-diff": "^1.0.1",
+    "@types/jest": "^27.0.1",
     "@types/node": "^15.12.0",
-    "@typescript-eslint/eslint-plugin": "^4.28.0",
-    "@typescript-eslint/parser": "^4.28.0",
-    "eslint": "^7.27.0",
-    "eslint-plugin-import": "^2.23.4",
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.24.0",
     "fs-extra": "^10.0.0",
-    "husky": "^6.0.0",
-    "jest": "^27.0.5",
-    "prettier": "^2.3.1",
-    "ts-jest": "^27.0.2",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.4",
     "tsd": "^0.17.0",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.5"
   },
   "husky": {
     "hooks": {

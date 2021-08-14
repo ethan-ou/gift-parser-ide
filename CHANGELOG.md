@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## 0.2.4 (14-08-20)
+
+- Switch to gift-pegjs
+- Internal refactoring
+
 ## 0.2.3 (25-01-20)
 
 - Resolve escaped brackets at end of line causing early split
