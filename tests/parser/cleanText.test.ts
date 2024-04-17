@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
-import cleanText from "../../parser/cleanText";
+import cleanText from "../../src/parser/cleanText";
+import { describe, it } from "node:test";
+import assert from "node:assert";
 
 describe("Clean Text", () => {
   const folderPath = path.join(__dirname, "/mocks/cleanText");
@@ -13,7 +15,7 @@ describe("Clean Text", () => {
     const filePath = path.join(folderPath, file);
     const expectedPath = path.join(
       folderPath,
-      `${path.basename(file, ".gift")}.json`
+      `${path.basename(file, ".gift")}.json`,
     );
 
     const text = fs.readFileSync(filePath, "utf-8");
@@ -24,7 +26,7 @@ describe("Clean Text", () => {
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
     it(`Parses ${file}`, () => {
-      expect(cleanText(text)).toEqual(expected);
+      assert.strictEqual(cleanText(text), expected);
     });
   });
 });

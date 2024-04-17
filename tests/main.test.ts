@@ -1,7 +1,9 @@
 import fs from "fs";
 import { GIFTQuestion } from "gift-pegjs";
 import path from "path";
-import GIFTParser, { parser } from "../index";
+import GIFTParser, { parser } from "../src/";
+import { describe, it } from "node:test";
+import assert from "node:assert";
 
 // Temporarily remove tags and id since they require rework of comments
 function removeTagsandId(GIFTQuestions: GIFTQuestion[]) {
@@ -28,22 +30,23 @@ describe("Exports Parser: Correct Mocks", () => {
     const text = fs.readFileSync(filePath, "utf-8");
     const expectedPath = path.join(
       folderPath,
-      `${path.basename(file, ".gift")}.json`
+      `${path.basename(file, ".gift")}.json`,
     );
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
     it(`Class Error Parser: ${file}`, () => {
       const Parser = new GIFTParser();
-      expect(Parser.update(text).errorOnly()).toEqual([]);
-      expect(Parser.update(text).parseOnly()).toEqual(
-        removeTagsandId(expected)
+      assert.deepStrictEqual(Parser.update(text).errorOnly(), []);
+      assert.deepStrictEqual(
+        Parser.update(text).parseOnly(),
+        removeTagsandId(expected),
       );
     });
 
     it(`Function Error Parser: ${file}`, () => {
-      expect(parser.errorOnly(text)).toEqual([]);
-      expect(parser.parseOnly(text)).toEqual(removeTagsandId(expected));
+      assert.deepStrictEqual(parser.errorOnly(text), []);
+      assert.deepStrictEqual(parser.parseOnly(text), removeTagsandId(expected));
     });
   });
 });
@@ -59,7 +62,7 @@ describe("Exports Parser: Error Mocks", () => {
     const filePath = path.join(folderPath, file);
     const expectedPath = path.join(
       folderPath,
-      `${path.basename(file, ".gift")}.json`
+      `${path.basename(file, ".gift")}.json`,
     );
 
     const text = fs.readFileSync(filePath, "utf-8");
@@ -71,11 +74,11 @@ describe("Exports Parser: Error Mocks", () => {
 
     it(`Class Error Parser: ${file}`, () => {
       const Parser = new GIFTParser();
-      expect(Parser.update(text).errorOnly()).toEqual(expected);
+      assert.deepStrictEqual(Parser.update(text).errorOnly(), expected);
     });
 
     it(`Function Error Parser: ${file}`, () => {
-      expect(parser.errorOnly(text)).toEqual(expected);
+      assert.deepStrictEqual(parser.errorOnly(text), expected);
     });
   });
 });
@@ -94,7 +97,7 @@ describe("Exports Parser: Incremental Parsing Mocks", () => {
     const filePath = path.join(folderPath, file);
     const expectedPath = path.join(
       folderPath,
-      `${path.basename(file, ".gift")}.json`
+      `${path.basename(file, ".gift")}.json`,
     );
 
     const text = fs.readFileSync(filePath, "utf-8");
@@ -104,8 +107,9 @@ describe("Exports Parser: Incremental Parsing Mocks", () => {
 
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
     it(`Class Incremental Parsing: ${file}`, () => {
-      expect(Parser.update(text).errorOnly()).toEqual(
-        removeTagsandId(expected)
+      assert.deepStrictEqual(
+        Parser.update(text).errorOnly(),
+        removeTagsandId(expected),
       );
     });
   });

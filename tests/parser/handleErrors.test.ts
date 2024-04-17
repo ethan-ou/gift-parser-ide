@@ -3,7 +3,9 @@ import path from "path";
 import handleErrors, {
   handleSingleError,
   correctMessage,
-} from "../../parser/handleErrors";
+} from "../../src/parser/handleErrors";
+import { describe, it } from "node:test";
+import assert from "node:assert";
 
 describe("Error Module: Mocks", () => {
   const folderPath = path.join(__dirname, "/mocks/handleErrors/input");
@@ -16,7 +18,7 @@ describe("Error Module: Mocks", () => {
     const filePath = path.join(folderPath, file);
     const expectedPath = path.join(
       path.join(__dirname, "/mocks/handleErrors/expected"),
-      `${path.basename(file)}`
+      `${path.basename(file)}`,
     );
 
     const text = JSON.parse(fs.readFileSync(filePath, "utf-8"));
@@ -29,9 +31,10 @@ describe("Error Module: Mocks", () => {
     // );
 
     it(`Parses ${file}`, () => {
-      expect(
-        JSON.parse(JSON.stringify(handleSingleError(text, originalText, "\n")))
-      ).toEqual(expected);
+      assert.deepStrictEqual(
+        JSON.parse(JSON.stringify(handleSingleError(text, originalText, "\n"))),
+        expected,
+      );
     });
   });
 });
