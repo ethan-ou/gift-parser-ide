@@ -4,10 +4,9 @@
   "description": "A parser for Moodle's GIFT format designed for error checking in IDE's.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
-    "start": "npm run build && node ./out/index.js",
-    "build": "tsup src/index.ts",
+    "dev": "tsx src/index.ts",
+    "build": "tsup src/index.ts --dts",
     "test": "tsx --test tests/**/*.test.ts",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
