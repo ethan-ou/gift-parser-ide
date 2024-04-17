@@ -2,17 +2,15 @@
   "name": "gift-parser-ide",
   "version": "0.2.5",
   "description": "A parser for Moodle's GIFT format designed for error checking in IDE's.",
-  "main": "out/index.js",
-  "types": "out/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "start": "npm run build && node ./out/index.js",
-    "build": "tsc -p ./tsconfig.json",
-    "test": "jest",
-    "lint": "eslint . --fix",
+    "build": "tsup src/index.ts",
+    "test": "tsx --test tests/**/*.test.ts",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "prettier": "prettier --write .",
-    "update:parser": "node ./scripts/updateParser.js",
+    "prepublishOnly": "npm test",
     "test:perf": "npm run build && node ./scripts/performance.js"
   },
   "repository": {
@@ -32,12 +30,13 @@
   "devDependencies": {
     "@types/deep-diff": "^1.0.5",
     "@types/node": "^20.12.7",
-    "fs-extra": "^11.2.0",
     "prettier": "^3.2.5",
     "tsd": "^0.31.0",
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.2",
     "typescript": "^5.4.5"
   },
   "files": [
-    "out/**/*"
+    "dist/**/*"
   ]
 }
