@@ -1,6 +1,6 @@
 {
   "name": "gift-parser-ide",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A parser for Moodle's GIFT format designed for error checking in IDE's.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,7 +24,7 @@
   "homepage": "https://github.com/ethan-ou/gift-parser-ide#readme",
   "dependencies": {
     "deep-diff": "^1.0.2",
-    "gift-pegjs": "^0.2.2"
+    "gift-pegjs": "^0.2.3"
   },
   "devDependencies": {
     "@types/deep-diff": "^1.0.5",
