@@ -11,7 +11,7 @@ import { GIFTParse, GIFTParseSection, GIFTSyntaxError } from "../types";
 export default function handleErrors(
   parseArray: GIFTParseSection[],
   originalText: string,
-  lineEnding: string
+  lineEnding: string,
 ) {
   const EMPTYORSPACES = /^\s*$/g;
   const out = [];
@@ -29,7 +29,7 @@ export default function handleErrors(
 export function handleSingleError(
   parse: GIFTParseSection,
   originalText: string,
-  lineEnding: string
+  lineEnding: string,
 ): GIFTParseSection {
   const [success, error] = parse.result;
 
@@ -70,7 +70,7 @@ function findErrors(message: GIFTParseSection): GIFTParseSection {
     while (i < ITERATION_LIMIT) {
       const findToken = token(
         stack[stack.length - 1],
-        errors[errors.length - 1]
+        errors[errors.length - 1],
       );
       stack.push(findToken);
 
@@ -94,7 +94,7 @@ function findErrors(message: GIFTParseSection): GIFTParseSection {
 function token(text: string, message: GIFTSyntaxError) {
   return escapeToken(
     text,
-    findToken(text, message.found, message.location.start.offset)
+    findToken(text, message.found, message.location.start.offset),
   );
 }
 
@@ -106,7 +106,7 @@ function token(text: string, message: GIFTSyntaxError) {
 function findToken(
   text: string,
   token: string | null,
-  location: number
+  location: number,
 ): number {
   if (token === null) {
     throw new Error("Token is Null.");
@@ -160,7 +160,7 @@ function escapeToken(text: string, location: number): string {
 
     if (tokenNotEscaped) {
       return `${text.slice(0, location + 1)}${ESCAPE}${text.slice(
-        location + 1
+        location + 1,
       )}`;
     } else {
       throw new Error("No Token Found.");
@@ -189,7 +189,7 @@ function escapeToken(text: string, location: number): string {
 export function correctMessage(
   message: GIFTParseSection,
   originalText: string,
-  lineEnding: string
+  lineEnding: string,
 ): GIFTParseSection {
   return correctError(originalText, correctToken(message), lineEnding);
 }
@@ -197,7 +197,7 @@ export function correctMessage(
 function correctError(
   text: string,
   message: GIFTParseSection,
-  lineEnding: string
+  lineEnding: string,
 ): GIFTParseSection {
   const location = message.location;
 
@@ -222,8 +222,8 @@ function correctError(
         line: location.start - 1,
         column: 0,
       },
-      item
-    )
+      item,
+    ),
   );
 
   return {
@@ -268,7 +268,7 @@ function addError(
     offset: number;
     column: number;
   },
-  message: GIFTSyntaxError
+  message: GIFTSyntaxError,
 ): GIFTSyntaxError {
   return {
     ...message,
@@ -292,7 +292,7 @@ function addError(
 
 function removeOffset(
   number: number,
-  message: GIFTSyntaxError
+  message: GIFTSyntaxError,
 ): GIFTSyntaxError {
   return {
     ...message,
@@ -312,7 +312,7 @@ function removeOffset(
 
 function removeColumn(
   number: number,
-  message: GIFTSyntaxError
+  message: GIFTSyntaxError,
 ): GIFTSyntaxError {
   return {
     ...message,
@@ -332,7 +332,7 @@ function removeColumn(
 
 function removeColumnStart(
   number: number,
-  message: GIFTSyntaxError
+  message: GIFTSyntaxError,
 ): GIFTSyntaxError {
   return {
     ...message,

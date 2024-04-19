@@ -1,48 +1,45 @@
-[{
-        "id" : null,
-        "tags" : null,
-        "type": "Matching",
+[
+  {
+    "type": "Matching",
     "title": "Moodle activities",
     "stem": {
-        "format": "html",
-        "text": "Match the <b>activity</b> to the description."
+      "format": "html",
+      "text": "Match the <b>activity</b> to the description."
     },
     "hasEmbeddedAnswers": false,
     "globalFeedback": null,
-    "matchPairs": [{
-            "subquestion": {
-                "format": "html",
-                "text": "An activity supporting asynchronous discussions. "
-            },
-            "subanswer": "Forum"
+    "matchPairs": [
+      {
+        "subquestion": {
+          "format": "html",
+          "text": "An activity supporting asynchronous discussions."
         },
-        {
-            "subquestion": {
-                "format": "moodle",
-                "text": "A teacher asks a question and specifies a choice of multiple responses."
-            },
-            "subanswer": "Choice"
+        "subanswer": "Forum"
+      },
+      {
+        "subquestion": {
+          "format": "moodle",
+          "text": "A teacher asks a question and specifies a choice of multiple responses."
         },
-        {
-            "subquestion": {
-                "format": "plain",
-                "text": "A bank of record entries which participants can add to."
-            },
-            "subanswer": "Database"
+        "subanswer": "Choice"
+      },
+      {
+        "subquestion": {
+          "format": "plain",
+          "text": "A bank of record entries which participants can add to."
         },
-        {
-            "subquestion": {
-                "format": "markdown",
-                "text": "A collection of web pages that anyone can add to or edit."
-            },
-            "subanswer": "Wiki"
+        "subanswer": "Database"
+      },
+      {
+        "subquestion": {
+          "format": "markdown",
+          "text": "A collection of web pages that anyone can add to or edit."
         },
-        {
-            "subquestion": {
-                "format": "html",
-                "text": ""
-            },
-            "subanswer": "Chat"
-        }
-    ]
-}]
+        "subanswer": "Wiki"
+      },
+      { "subquestion": { "format": "html", "text": "" }, "subanswer": "Chat" }
+    ],
+    "id": null,
+    "tags": null
+  }
+]

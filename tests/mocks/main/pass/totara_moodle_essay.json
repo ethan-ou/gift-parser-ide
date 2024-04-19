@@ -1,12 +1,11 @@
-[{
-        "id" : null,
-        "tags" : null,
-        "type": "Essay",
+[
+  {
+    "type": "Essay",
     "title": "Q8",
-    "stem": {
-        "format": "moodle",
-        "text": "How are you?"
-    },
+    "stem": { "format": "moodle", "text": "How are you?" },
     "hasEmbeddedAnswers": false,
-    "globalFeedback": null
-}]
+    "globalFeedback": null,
+    "id": null,
+    "tags": null
+  }
+]

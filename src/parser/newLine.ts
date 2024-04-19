@@ -17,7 +17,7 @@ export const detectLineType = (string: string) => {
   }
 
   const crlf = newLines.filter(
-    (newline) => newline === newLineType.CRLF
+    (newline) => newline === newLineType.CRLF,
   ).length;
   const lf = newLines.length - crlf;
 

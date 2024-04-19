@@ -25,7 +25,7 @@ export const createTextSections = (text: string): GIFTTextSection[] =>
   findTextSections(cleanText(convertLineType(text, "LF")));
 
 export const parseTextSection = (
-  section: GIFTTextSection
+  section: GIFTTextSection,
 ): GIFTParseSection => {
   return {
     location: section,
@@ -36,7 +36,7 @@ export const parseTextSection = (
 export const findAllErrors = (
   parse: GIFTParseSection[],
   originalText: string,
-  lineEnding: string
+  lineEnding: string,
 ) => handleErrors(parse, originalText, lineEnding);
 
 /**
@@ -48,13 +48,13 @@ export const diffTextSection = (
   section: GIFTTextSection[],
   oldSection: GIFTTextSection[],
   changeArray: GIFTParseSection[],
-  originalText: string
+  originalText: string,
 ): GIFTParseSection[] => {
   const onChange = (section: GIFTTextSection): GIFTParseSection =>
     handleSingleError(
       parseTextSection(section),
       originalText,
-      detectLineType(originalText)
+      detectLineType(originalText),
     );
   const diffArray = diff(oldSection, section);
 
@@ -110,7 +110,7 @@ export const diffTextSection = (
  */
 export const filterParseType = (
   sections: GIFTParseSection[],
-  type: "success" | "error"
+  type: "success" | "error",
 ): GIFTQuestion[] | GIFTSyntaxError[] => {
   switch (type) {
     case "success":

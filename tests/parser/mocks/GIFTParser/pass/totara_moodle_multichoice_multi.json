@@ -20,7 +20,7 @@
           "isCorrect": false,
           "weight": -100,
           "text": { "format": "moodle", "text": "red" },
-          "feedback": { "format": "html", "text": "wrong\n    " }
+          "feedback": { "format": "html", "text": "wrong" }
         },
         {
           "isCorrect": false,

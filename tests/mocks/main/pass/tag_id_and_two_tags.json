@@ -1,9 +1,11 @@
-[{
-    "id" : "393",
-    "tags" : ["fred", "barney-wilma"],
+[
+  {
     "type": "Essay",
     "title": null,
-    "stem": {"format":"moodle", "text":"Essay?"},
+    "stem": { "format": "moodle", "text": "Essay?" },
     "hasEmbeddedAnswers": false,
-    "globalFeedback": null
-}]
+    "globalFeedback": null,
+    "id": null,
+    "tags": null
+  }
+]

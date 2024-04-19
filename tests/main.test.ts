@@ -33,6 +33,9 @@ describe("Exports Parser: Correct Mocks", () => {
       `${path.basename(file, ".gift")}.json`,
     );
 
+    // Write new tests to directory.
+    // fs.writeFileSync(expectedPath, JSON.stringify(parser.parseOnly(text)));
+
     const expected = JSON.parse(fs.readFileSync(expectedPath, "utf-8"));
 
     it(`Class Error Parser: ${file}`, () => {
